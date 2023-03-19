@@ -17,11 +17,11 @@ const validateLine = (line) => {
     return false;
   }
 
-  if (depatureStationId <= 0 || returnStationId <= 0) {
+  if (depatureStationId < 0 || returnStationId < 0) {
     return false;
   }
 
-  if (distance <= 10 || duration <= 10) {
+  if (distance < 10 || duration < 10) {
     return false;
   }
 
