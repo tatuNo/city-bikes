@@ -1,6 +1,7 @@
+/* eslint-disable no-restricted-globals */
 const isValidDate = (dateString) => {
   const date = new Date(dateString);
-  return date instanceof Date && !Number.isNaN(date);
+  return date instanceof Date && !isNaN(date);
 };
 
 const validateLine = (line) => {

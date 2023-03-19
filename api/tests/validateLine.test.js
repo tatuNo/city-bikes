@@ -15,7 +15,7 @@ describe("validateLine", () => {
 
   test("should return false when depature date is invalid", () => {
     const lineObject = {
-      depatureDate: "123",
+      depatureDate: "invalid date string",
       returnDate: "2021-05-31T23:55:38",
       depatureStationId: "001",
       returnStationId: "002",
