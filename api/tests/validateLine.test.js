@@ -79,7 +79,31 @@ describe("validateLine", () => {
       returnDate: new Date("2021-05-31T23:55:38"),
       depatureStationId: 1,
       returnStationId: 2,
-      distance: 9,
+      distance: 100,
+      duration: 9,
+    };
+    expect(validateLine(lineObject)).toBe(false);
+  });
+
+  test("should return false when duration is decimal number", () => {
+    const lineObject = {
+      depatureDate: new Date("2021-05-31T23:49:59"),
+      returnDate: new Date("2021-05-31T23:55:38"),
+      depatureStationId: 1,
+      returnStationId: 2,
+      distance: 100,
+      duration: 100.1,
+    };
+    expect(validateLine(lineObject)).toBe(false);
+  });
+
+  test("should return false when distance is decimal number", () => {
+    const lineObject = {
+      depatureDate: new Date("2021-05-31T23:49:59"),
+      returnDate: new Date("2021-05-31T23:55:38"),
+      depatureStationId: 1,
+      returnStationId: 2,
+      distance: 100.1,
       duration: 100,
     };
     expect(validateLine(lineObject)).toBe(false);
