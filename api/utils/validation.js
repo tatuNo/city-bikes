@@ -1,8 +1,5 @@
 /* eslint-disable no-restricted-globals */
-const isValidDate = (dateString) => {
-  const date = new Date(dateString);
-  return date instanceof Date && !isNaN(date);
-};
+const isValidDate = (date) => date instanceof Date && !isNaN(date);
 
 const validateLine = (line) => {
   const {
@@ -23,6 +20,10 @@ const validateLine = (line) => {
   }
 
   if (distance < 10 || duration < 10) {
+    return false;
+  }
+
+  if (!Number.isInteger(distance) || !Number.isInteger(duration)) {
     return false;
   }
 
