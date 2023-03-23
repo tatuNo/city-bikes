@@ -1,8 +1,10 @@
+import { Journeys } from "./pages";
+
 const App = () => (
   <div>
-    <h1 className="text-center text-3xl font-bold text-red-500 underline">
-      Hello world!
-    </h1>
+    <div className="bg-gray-100">
+      <Journeys />
+    </div>
   </div>
 );
 
