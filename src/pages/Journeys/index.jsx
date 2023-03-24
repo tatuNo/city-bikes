@@ -18,7 +18,7 @@ const Journeys = () => {
         </tr>
       </thead>
       <tbody className="bg-white dark:bg-slate-800">
-        {journeys.map((journey) => (
+        {journeys.rows.map((journey) => (
           <tr key={journey.id}>
             <td className="p-4 pl-8">{journey.depatureStation}</td>
             <td className="p-4 pl-8">{journey.returnStation}</td>
