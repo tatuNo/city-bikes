@@ -1,4 +1,5 @@
 import useJourneys from "../../hooks/useJourneys";
+import Journey from "./Journey";
 
 const Journeys = () => {
   const { journeys, isLoading } = useJourneys();
@@ -19,12 +20,13 @@ const Journeys = () => {
       </thead>
       <tbody className="bg-white dark:bg-slate-800">
         {journeys.rows.map((journey) => (
-          <tr key={journey.id}>
-            <td className="p-4 pl-8">{journey.depatureStation}</td>
-            <td className="p-4 pl-8">{journey.returnStation}</td>
-            <td className="p-4 pl-8">{journey.distance}</td>
-            <td className="p-4 pl-8">{journey.duration}</td>
-          </tr>
+          <Journey
+            key={journey.id}
+            depatureStation={journey.depatureStation}
+            returnStation={journey.returnStation}
+            distance={journey.distance}
+            duration={journey.duration}
+          />
         ))}
       </tbody>
     </table>
