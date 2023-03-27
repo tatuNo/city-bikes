@@ -1,10 +1,14 @@
 const router = require("express").Router();
+
 const { Journey } = require("../models");
 
 router.get("/", async (req, res) => {
-  const limit = parseInt(req.query.limit, 10) || 10;
-  const offset = parseInt(req.query.offset, 10) || 0;
-  const journeys = await Journey.findAndCountAll({ limit, offset });
+  const { limit = 10, offset = 0, sort = "id" } = req.query;
+  const order = sort.startsWith("-")
+    ? [[sort.slice(1), "DESC"]]
+    : [[sort, "ASC"]];
+
+  const journeys = await Journey.findAndCountAll({ limit, offset, order });
   res.json(journeys);
 });
 
