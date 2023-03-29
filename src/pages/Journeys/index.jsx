@@ -3,6 +3,7 @@ import ReactPaginate from "react-paginate";
 
 import useJourneys from "../../hooks/useJourneys";
 import JourneyList from "./JourneyList";
+import SearchFilters from "./SearchFilters";
 
 const Journeys = () => {
   const [offset, setOffset] = useState(0);
@@ -27,24 +28,7 @@ const Journeys = () => {
 
   return (
     <div>
-      <div>
-        <div className="flex pl-8">
-          <label htmlFor="sort">
-            Order
-            <select
-              id="sort"
-              className="focus:shadow-outline block w-full rounded border border-gray-400 bg-white px-4 py-2 pr-8 leading-tight shadow hover:border-gray-500 focus:outline-none"
-              onChange={(e) => setSort(e.target.value)}
-            >
-              <option value="id">id</option>
-              <option value="-distance">Longest distance</option>
-              <option value="distance">Shortest distance</option>
-              <option value="-duration">Longest duration</option>
-              <option value="duration">Shortest duration</option>
-            </select>
-          </label>
-        </div>
-      </div>
+      <SearchFilters setSort={setSort} />
       <JourneyList journeys={journeys.rows} />
       <div className="hidden p-4 pl-8 text-left sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
