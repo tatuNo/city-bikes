@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
 import journeyService from "../services/journeys";
 
-const useJourneys = (offset) => {
+const useJourneys = (params) => {
   const { data, isLoading } = useQuery(
-    ["journeys", offset],
-    () => journeyService.getAll(offset),
+    ["journeys", params],
+    () => journeyService.getAll(params),
     { keepPreviousData: true }
   );
 

@@ -6,7 +6,11 @@ import Journey from "./Journey";
 
 const Journeys = () => {
   const [offset, setOffset] = useState(0);
-  const { journeys, isLoading } = useJourneys(offset);
+  const [sort, setSort] = useState("id");
+  const { journeys, isLoading } = useJourneys({
+    offset,
+    sort,
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -23,6 +27,24 @@ const Journeys = () => {
 
   return (
     <div>
+      <div>
+        <div className="flex pl-8">
+          <label htmlFor="sort">
+            Order
+            <select
+              id="sort"
+              className="focus:shadow-outline block w-full rounded border border-gray-400 bg-white px-4 py-2 pr-8 leading-tight shadow hover:border-gray-500 focus:outline-none"
+              onChange={(e) => setSort(e.target.value)}
+            >
+              <option value="id">id</option>
+              <option value="-distance">Longest distance</option>
+              <option value="distance">Shortest distance</option>
+              <option value="-duration">Longest duration</option>
+              <option value="duration">Shortest duration</option>
+            </select>
+          </label>
+        </div>
+      </div>
       <table className="w-full table-auto border-collapse text-sm">
         <thead>
           <tr>
