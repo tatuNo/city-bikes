@@ -6,7 +6,7 @@ const initialJourneys = [
     depatureStation: "Station 1",
     returnStationId: 3,
     returnStation: "Station 1",
-    distance: 100,
+    distance: 2,
     duration: 100,
   },
   {
@@ -16,7 +16,7 @@ const initialJourneys = [
     depatureStation: "Station 2",
     returnStationId: 3,
     returnStation: "Station 2",
-    distance: 100,
+    distance: 6,
     duration: 100,
   },
   {
@@ -26,7 +26,7 @@ const initialJourneys = [
     depatureStation: "Station 3",
     returnStationId: 3,
     returnStation: "Station 3",
-    distance: 100,
+    distance: 5,
     duration: 100,
   },
   {
@@ -36,7 +36,7 @@ const initialJourneys = [
     depatureStation: "Station 4",
     returnStationId: 3,
     returnStation: "Station 4",
-    distance: 100,
+    distance: 1,
     duration: 100,
   },
   {
@@ -46,7 +46,7 @@ const initialJourneys = [
     depatureStation: "Station 5",
     returnStationId: 3,
     returnStation: "Station 5",
-    distance: 100,
+    distance: 3,
     duration: 100,
   },
   {
@@ -56,7 +56,7 @@ const initialJourneys = [
     depatureStation: "Station 6",
     returnStationId: 3,
     returnStation: "Station 6",
-    distance: 100,
+    distance: 9,
     duration: 100,
   },
   {
@@ -66,7 +66,7 @@ const initialJourneys = [
     depatureStation: "Station 7",
     returnStationId: 3,
     returnStation: "Station 7",
-    distance: 100,
+    distance: 7,
     duration: 100,
   },
   {
@@ -76,7 +76,7 @@ const initialJourneys = [
     depatureStation: "Station 8",
     returnStationId: 3,
     returnStation: "Station 8",
-    distance: 100,
+    distance: 8,
     duration: 100,
   },
   {
@@ -86,7 +86,7 @@ const initialJourneys = [
     depatureStation: "Station 9",
     returnStationId: 3,
     returnStation: "Station 9",
-    distance: 100,
+    distance: 10,
     duration: 100,
   },
   {
@@ -96,7 +96,7 @@ const initialJourneys = [
     depatureStation: "Station 10",
     returnStationId: 3,
     returnStation: "Station 10",
-    distance: 100,
+    distance: 4,
     duration: 100,
   },
 ];

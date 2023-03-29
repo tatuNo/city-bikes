@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --verbose",
+    "test": "NODE_ENV=test jest --verbose --runInBand",
     "init-db": "node api/init.js",
     "dev": "NODE_ENV=development vite",
     "dev-server": "NODE_ENV=development nodemon api/index.js",
