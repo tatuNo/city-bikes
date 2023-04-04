@@ -35,8 +35,31 @@ const initialValues = {
   minDuration: "",
 };
 
-const SearchFilters = ({ setSort }) => {
-  const onSubmit = (values) => console.log(values);
+const SearchFilters = ({ setSort, setSearch }) => {
+  const onSubmit = ({
+    station,
+    maxDistance,
+    minDistance,
+    maxDuration,
+    minDuration,
+  }) => {
+    const search = {};
+
+    if (station) {
+      search.station = station;
+    }
+
+    if (minDistance && maxDistance) {
+      search.distance = `${minDistance},${maxDistance}`;
+    }
+
+    if (minDuration && maxDuration) {
+      search.duration = `${minDuration},${maxDuration}`;
+    }
+
+    setSearch(search);
+  };
+
   return (
     <div className="flex pl-8">
       <label htmlFor="sort">

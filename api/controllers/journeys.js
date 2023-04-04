@@ -13,6 +13,8 @@ router.get("/", async (req, res) => {
     station,
   } = req.query;
 
+  console.log(req.query);
+
   let where = {};
 
   if (distance) {
@@ -21,8 +23,8 @@ router.get("/", async (req, res) => {
   }
 
   if (duration) {
-    const [min, max] = distance.split(",").map(parseFloat);
-    where.distance = { [Op.between]: [min, max] };
+    const [min, max] = duration.split(",").map(parseFloat);
+    where.duration = { [Op.between]: [min, max] };
   }
 
   if (station) {

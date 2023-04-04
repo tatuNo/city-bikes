@@ -8,9 +8,11 @@ import Pagination from "./Pagination";
 const Journeys = () => {
   const [offset, setOffset] = useState(0);
   const [sort, setSort] = useState("id");
+  const [search, setSearch] = useState({});
   const { journeys, isLoading } = useJourneys({
     offset,
     sort,
+    ...search,
   });
 
   if (isLoading) {
@@ -21,7 +23,7 @@ const Journeys = () => {
 
   return (
     <div>
-      <SearchFilters setSort={setSort} />
+      <SearchFilters setSort={setSort} setSearch={setSearch} />
       <JourneyList journeys={journeys.rows} />
       <Pagination itemCount={itemCount} setOffset={setOffset} />
     </div>
