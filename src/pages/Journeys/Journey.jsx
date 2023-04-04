@@ -1,9 +1,9 @@
 const Journey = ({ depatureStation, returnStation, distance, duration }) => (
-  <tr>
-    <td className="p-4 pl-8">{depatureStation}</td>
-    <td className="p-4 pl-8">{returnStation}</td>
-    <td className="p-4 pl-8">{distance}</td>
-    <td className="p-4 pl-8">{duration}</td>
+  <tr className="text-left">
+    <td className="">{depatureStation}</td>
+    <td className="">{returnStation}</td>
+    <td className="">{distance}</td>
+    <td className="">{duration}</td>
   </tr>
 );
 

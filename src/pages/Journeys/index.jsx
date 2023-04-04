@@ -22,10 +22,14 @@ const Journeys = () => {
   const itemCount = journeys.count;
 
   return (
-    <div>
-      <SearchFilters setSort={setSort} setSearch={setSearch} />
-      <JourneyList journeys={journeys.rows} />
-      <Pagination itemCount={itemCount} setOffset={setOffset} />
+    <div className="text-center">
+      <div className="flex flex-1 flex-col bg-neutral-700 md:flex-row">
+        <SearchFilters setSort={setSort} setSearch={setSearch} />
+        <JourneyList className="flex-1" journeys={journeys.rows} />
+      </div>
+      <div>
+        <Pagination itemCount={itemCount} setOffset={setOffset} />
+      </div>
     </div>
   );
 };

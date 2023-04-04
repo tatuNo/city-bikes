@@ -1,10 +1,9 @@
 import { Journeys } from "./pages";
 
 const App = () => (
-  <div>
-    <div className="bg-gray-100">
-      <Journeys />
-    </div>
+  <div className="bg-neutral-800 w-full text-white">
+    <header className="">Header</header>
+    <Journeys />
   </div>
 );
 

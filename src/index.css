@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

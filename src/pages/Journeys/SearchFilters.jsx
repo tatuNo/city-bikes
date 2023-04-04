@@ -61,58 +61,79 @@ const SearchFilters = ({ setSort, setSearch }) => {
   };
 
   return (
-    <div className="flex pl-8">
-      <label htmlFor="sort">
-        Order
-        <select
-          id="sort"
-          className="focus:shadow-outline block w-full rounded border border-gray-400 bg-white px-4 py-2 pr-8 leading-tight shadow hover:border-gray-500 focus:outline-none"
-          onChange={(e) => setSort(e.target.value)}
+    <div className="flex flex-col">
+      <h2 className="pb-4 font-bold">Filters</h2>
+      <div>
+        <label htmlFor="sort">
+          Order
+          <select
+            id="sort"
+            className="focus:shadow-outline block w-full rounded border border-gray-400 bg-white leading-tight text-black shadow focus:outline-none"
+            onChange={(e) => setSort(e.target.value)}
+          >
+            <option value="id">id</option>
+            <option value="-distance">Longest distance</option>
+            <option value="distance">Shortest distance</option>
+            <option value="-duration">Longest duration</option>
+            <option value="duration">Shortest duration</option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
+          className="mb-4 flex flex-row rounded"
         >
-          <option value="id">id</option>
-          <option value="-distance">Longest distance</option>
-          <option value="distance">Shortest distance</option>
-          <option value="-duration">Longest duration</option>
-          <option value="duration">Shortest duration</option>
-        </select>
-      </label>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-        className="mb-4 flex flex-row gap-4 rounded px-8"
-      >
-        {({ handleSubmit }) => (
-          <Form>
-            <div>
-              <TextField name="station" type="text" label="Station" />
-              <TextField
-                name="minDistance"
-                type="number"
-                label="Min distance"
-              />
-              <TextField
-                name="maxDistance"
-                type="number"
-                label="Max distance"
-              />
-              <TextField
-                name="minDuration"
-                type="number"
-                label="Min duration"
-              />
-              <TextField
-                name="maxDuration"
-                type="number"
-                label="Max duration"
-              />
-              <button type="button" onClick={handleSubmit}>
-                Apply
-              </button>
-            </div>
-          </Form>
-        )}
-      </Formik>
+          {({ handleSubmit }) => (
+            <Form>
+              <div>
+                <TextField name="station" type="text" label="Station" />
+                <div className="flex">
+                  <TextField
+                    name="minDistance"
+                    type="number"
+                    label="Min distance"
+                  />
+                  <TextField
+                    name="maxDistance"
+                    type="number"
+                    label="Max distance"
+                  />
+                </div>
+                <div className="flex">
+                  <TextField
+                    name="minDuration"
+                    type="number"
+                    label="Min duration"
+                  />
+                  <TextField
+                    name="maxDuration"
+                    type="number"
+                    label="Max duration"
+                  />
+                </div>
+                <div>
+                  <button
+                    className="mr-2 mb-2 w-full flex-1 rounded-lg bg-orange-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                    type="button"
+                    onClick={handleSubmit}
+                  >
+                    Apply
+                  </button>
+                  <button
+                    className="gb-red-700 mr-2 mb-2 w-full flex-1 rounded-lg bg-orange-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                    type="button"
+                  >
+                    Reset filters
+                  </button>
+                </div>
+              </div>
+            </Form>
+          )}
+        </Formik>
+      </div>
     </div>
   );
 };

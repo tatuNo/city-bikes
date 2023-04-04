@@ -4,10 +4,10 @@ const TextField = ({ label, ...props }) => {
   const [field, meta, helpers] = useField(props);
   return (
     <>
-      <label className="mb-2 block text-sm font-bold text-gray-700">
+      <label className="mb-2 block text-sm font-bold">
         {label}
         <input
-          className="focus:shadow-outline w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow focus:outline-none"
+          className="focus:shadow-outline w-full appearance-none rounded border py-2 px-3 leading-tight shadow focus:outline-none text-black"
           {...field}
           {...props}
         />
