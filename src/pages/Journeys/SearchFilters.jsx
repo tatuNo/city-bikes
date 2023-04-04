@@ -1,5 +1,31 @@
 import { Form, Formik } from "formik";
 import TextField from "../../components/TextField";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object().shape(
+  {
+    minDistance: Yup.number().when("maxDistance", {
+      is: (val) => val !== undefined,
+      then: () => Yup.number().required("Min distance required"),
+    }),
+    maxDistance: Yup.number().when("minDistance", {
+      is: (val) => val !== undefined,
+      then: () => Yup.number().required("Max distance required"),
+    }),
+    minDuration: Yup.number().when("maxDuration", {
+      is: (val) => val !== undefined,
+      then: () => Yup.number().required("Min duration required"),
+    }),
+    maxDuration: Yup.number().when("minDuration", {
+      is: (val) => val !== undefined,
+      then: () => Yup.number().required("Max duration required"),
+    }),
+  },
+  [
+    ["maxDistance", "minDistance"],
+    ["maxDuration", "minDuration"],
+  ]
+);
 
 const initialValues = {
   station: "",
@@ -30,6 +56,7 @@ const SearchFilters = ({ setSort }) => {
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
+        validationSchema={validationSchema}
         className="mb-4 flex flex-row gap-4 rounded px-8"
       >
         {({ handleSubmit }) => (
