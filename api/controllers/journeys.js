@@ -13,8 +13,6 @@ router.get("/", async (req, res) => {
     station,
   } = req.query;
 
-  console.log(req.query);
-
   let where = {};
 
   if (distance) {

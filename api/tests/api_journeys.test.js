@@ -57,4 +57,21 @@ describe("GET /journeys", () => {
       expect(journeys[i].distance <= journeys[i + 1].distance).toBeTruthy();
     }
   });
+
+  test("should return journeys filtered by distance", async () => {
+    const res = await api.get("/api/journeys?distance=1,5").expect(200);
+
+    const journeys = res.body.rows;
+    journeys.forEach((journey) => {
+      expect(journey.distance).toBeGreaterThanOrEqual(1);
+      expect(journey.distance).toBeLessThanOrEqual(5);
+    });
+  });
+  
+  
+  test('should return journeys filtered by station', async () => {
+    const res = await api.get("/api/journeys?station=Station+5").expect(200);
+    expect(res.body.rows.length).toBe(1);
+    expect(res.body.rows[0].returnStation).toBe("Station 5");
+  });
 });
