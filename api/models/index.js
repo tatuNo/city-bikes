@@ -1,5 +1,7 @@
 const Journey = require("./journey");
+const Station = require("./station");
 
 Journey.sync();
+Station.sync();
 
-module.exports = { Journey };
+module.exports = { Journey, Station };
