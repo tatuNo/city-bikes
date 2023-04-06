@@ -1,15 +1,18 @@
 const fs = require("fs");
 const path = require("path");
 const csv = require("fast-csv");
+const fastGlob = require("fast-glob");
 
 const { validateLine } = require("./utils/validation");
 const { connectToDatabase } = require("./utils/db");
 const { Journey } = require("./models");
 
-const validData = [];
+const BATCH_SIZE = 1000;
 
-const initDatabase = () => {
-  fs.createReadStream(path.resolve(__dirname, "data", "2021-05.csv"))
+const processFile = (filePath) => {
+  let validData = [];
+  const stream = fs
+    .createReadStream(filePath)
     .pipe(
       csv.parse({
         renameHeaders: true,
@@ -35,14 +38,36 @@ const initDatabase = () => {
       duration: Number(data.duration),
     }))
     .validate((data) => validateLine(data))
-    .on("error", (error) => console.error(error))
-    .on("data", (data) => validData.push(data))
-    .on("end", () => Journey.bulkCreate(validData));
+    .on("error", (error) => reject(error))
+    .on("data", (data) => {
+      validData.push(data);
+      if (validData.length > BATCH_SIZE) {
+        stream.pause();
+        Journey.bulkCreate(validData).then(() => {
+          validData = [];
+          stream.resume();
+        });
+      }
+    })
+    .on("end", () => {
+      Journey.bulkCreate(validData).then(() => {
+        validData = [];
+        console.log(`Finished ${filePath}`);
+      });
+    });
+};
+
+const processFiles = async (pattern) => {
+  const filePaths = await fastGlob(pattern);
+  for (const filePath of filePaths) {
+    console.log(`Processing ${filePath}`);
+    processFile(filePath);
+  }
 };
 
 const start = async () => {
   await connectToDatabase();
-  initDatabase();
+  await processFiles(path.resolve(__dirname, "data", "*.csv"));
 };
 
 start();
