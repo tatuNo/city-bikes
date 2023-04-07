@@ -48,6 +48,13 @@ router.get("/", async (req, res) => {
     : [[sort, "ASC"]];
 
   const journeys = await Journey.findAndCountAll({
+    attributes: [
+      "id",
+      "depatureStation",
+      "returnStation",
+      "distance",
+      "duration",
+    ],
     limit,
     offset,
     order,
