@@ -3,7 +3,7 @@ const supertest = require("supertest");
 const { sequelize } = require("../utils/db");
 const app = require("../app");
 const { Journey } = require("../models");
-const initialJourneys = require("./test_helper");
+const { initialJourneys } = require("./test_helper");
 
 const api = supertest(app);
 

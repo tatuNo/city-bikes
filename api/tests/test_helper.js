@@ -101,4 +101,67 @@ const initialJourneys = [
   },
 ];
 
-module.exports = initialJourneys;
+initialStations = [
+  {
+    name: "Station 1",
+    address: "Station 1 address",
+    xCoordinate: "1",
+    yCoordinate: "1",
+  },
+  {
+    name: "Station 2",
+    address: "Station 2 address",
+    xCoordinate: "1",
+    yCoordinate: "1",
+  },
+  {
+    name: "Station 3",
+    address: "Station 3 address",
+    xCoordinate: "1",
+    yCoordinate: "1",
+  },
+  {
+    name: "Station 4",
+    address: "Place",
+    xCoordinate: "1",
+    yCoordinate: "1",
+  },
+  {
+    name: "Station 5",
+    address: "Station 5 address",
+    xCoordinate: "1",
+    yCoordinate: "1",
+  },
+  {
+    name: "Station 6",
+    address: "Station 6 address",
+    xCoordinate: "1",
+    yCoordinate: "1",
+  },
+  {
+    name: "Station 7",
+    address: "Station 7 address",
+    xCoordinate: "1",
+    yCoordinate: "1",
+  },
+  {
+    name: "Station 8",
+    address: "Place",
+    xCoordinate: "1",
+    yCoordinate: "1",
+  },
+  {
+    name: "Station 9",
+    address: "Station 9 address",
+    xCoordinate: "1",
+    yCoordinate: "1",
+  },
+  {
+    name: "Station 10",
+    address: "Station 10 address",
+    xCoordinate: "1",
+    yCoordinate: "1",
+  },
+];
+
+module.exports = { initialJourneys, initialStations };
