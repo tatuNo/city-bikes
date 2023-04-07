@@ -1,15 +1,15 @@
 const fs = require("fs");
 const path = require("path");
 const csv = require("fast-csv");
-const fastGlob = require("fast-glob");
+const fg = require("fast-glob");
 
 const { validateLine } = require("./utils/validation");
 const { connectToDatabase } = require("./utils/db");
-const { Journey } = require("./models");
+const { Journey, Station } = require("./models");
 
 const BATCH_SIZE = 1000;
 
-const processFile = (filePath) => {
+const processJourneyFile = (filePath) => {
   let validData = [];
   const stream = fs
     .createReadStream(filePath)
@@ -38,7 +38,7 @@ const processFile = (filePath) => {
       duration: Number(data.duration),
     }))
     .validate((data) => validateLine(data))
-    .on("error", (error) => reject(error))
+    .on("error", (error) => console.log(error))
     .on("data", (data) => {
       validData.push(data);
       if (validData.length > BATCH_SIZE) {
@@ -57,17 +57,56 @@ const processFile = (filePath) => {
     });
 };
 
-const processFiles = async (pattern) => {
-  const filePaths = await fastGlob(pattern);
-  for (const filePath of filePaths) {
-    console.log(`Processing ${filePath}`);
-    processFile(filePath);
-  }
+const processStationFile = (filePath) => {
+  let validData = [];
+  const stream = fs
+    .createReadStream(filePath)
+    .pipe(csv.parse({
+      headers: headers => headers.map(h => h?.toLowerCase()),
+    }))
+    .transform((data) => ({
+      stationId: Number(data.id),
+      name: data.nimi,
+      address: data.osoite,
+      xCoordinate: data.x,
+      yCoordinate: data.y,
+    }))
+    .on("error", (error) => console.log(error))
+    .on("data", (data) => {
+      validData.push(data);
+      if (validData.length > BATCH_SIZE) {
+        stream.pause();
+        Station.bulkCreate(validData).then(() => {
+          validData = [];
+          stream.resume();
+        });
+      }
+    })
+    .on("end", () => {
+      Station.bulkCreate(validData).then(() => {
+        validData = [];
+        console.log(`Finished ${filePath}`);
+      });
+    });
 };
 
 const start = async () => {
   await connectToDatabase();
-  await processFiles(path.resolve(__dirname, "data", "*.csv"));
+
+  const journeyFiles = await fg(
+    path.resolve(__dirname, "data/journeys", "*.csv")
+  );
+  const stationFiles = await fg(
+    path.resolve(__dirname, "data/stations/", "*.csv")
+  );
+
+  for (const journeyFile of journeyFiles) {
+    processJourneyFile(journeyFile);
+  }
+
+  for (const stationFile of stationFiles) {
+    processStationFile(stationFile);
+  }
 };
 
 start();
