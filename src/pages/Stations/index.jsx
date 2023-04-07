@@ -3,6 +3,7 @@ import { useDebounce } from "use-debounce";
 import useStations from "../../hooks/useStations";
 import StationList from "./StationList";
 import Pagination from "../../components/Pagination";
+import Map from "./Map";
 
 const Stations = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,6 +31,7 @@ const Stations = () => {
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <StationList stations={stations.rows} />
+      <Map />
       <Pagination itemCount={itemCount} setOffset={setOffset} />
     </div>
   );
