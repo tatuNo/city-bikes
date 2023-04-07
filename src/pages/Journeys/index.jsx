@@ -3,7 +3,7 @@ import { useState } from "react";
 import useJourneys from "../../hooks/useJourneys";
 import JourneyList from "./JourneyList";
 import SearchFilters from "./SearchFilters";
-import Pagination from "./Pagination";
+import Pagination from "../../components/Pagination";
 
 const Journeys = () => {
   const [offset, setOffset] = useState(0);
