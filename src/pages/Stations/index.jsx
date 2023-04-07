@@ -31,7 +31,7 @@ const Stations = () => {
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <StationList stations={stations.rows} />
-      <Map />
+      <Map stations={stations.rows}/>
       <Pagination itemCount={itemCount} setOffset={setOffset} />
     </div>
   );
