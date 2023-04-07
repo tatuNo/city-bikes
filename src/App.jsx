@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Journeys } from "./pages";
+import { Journeys, Stations } from "./pages";
 import Navbar from "./components/Navbar";
 
 const App = () => (
@@ -7,6 +7,7 @@ const App = () => (
     <Navbar />
     <Routes>
       <Route path="/" element={<Journeys />} />
+      <Route path="/stations" element={<Stations />} />
     </Routes>
   </div>
 );
