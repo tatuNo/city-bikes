@@ -1,11 +1,17 @@
 import { useState } from "react";
+import { useDebounce } from "use-debounce";
 import useStations from "../../hooks/useStations";
 import StationList from "./StationList";
 import Pagination from "../../components/Pagination";
 
 const Stations = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [search] = useDebounce(searchQuery, 500);
   const [offset, setOffset] = useState(0);
-  const { stations, isLoading } = useStations({ offset });
+  const { stations, isLoading } = useStations({
+    offset,
+    search: search === "" ? null : search,
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -15,6 +21,14 @@ const Stations = () => {
 
   return (
     <div>
+      <input
+        name="search"
+        className="text-black"
+        defaultValue={null}
+        type="search"
+        placeholder="Search"
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
       <StationList stations={stations.rows} />
       <Pagination itemCount={itemCount} setOffset={setOffset} />
     </div>
