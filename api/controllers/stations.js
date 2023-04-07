@@ -24,7 +24,12 @@ router.get("/", async (req, res) => {
     };
   }
 
-  const stations = await Station.findAndCountAll({ limit, offset, where });
+  const stations = await Station.findAndCountAll({
+    attributes: ["id", "name", "address", "xCoordinate", "yCoordinate"],
+    limit,
+    offset,
+    where,
+  });
   res.json(stations);
 });
 
