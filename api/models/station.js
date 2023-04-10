@@ -9,10 +9,6 @@ Station.init(
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
-    },
-    stationId: {
-      type: DataTypes.INTEGER,
     },
     name: {
       type: DataTypes.STRING,

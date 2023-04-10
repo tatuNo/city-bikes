@@ -11,23 +11,17 @@ Journey.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    depatureDate: {
+    departureDate: {
       type: DataTypes.DATE,
     },
     returnDate: {
       type: DataTypes.DATE,
     },
-    depatureStationId: {
+    departureStationId: {
       type: DataTypes.INTEGER,
-    },
-    depatureStation: {
-      type: DataTypes.TEXT,
     },
     returnStationId: {
       type: DataTypes.INTEGER,
-    },
-    returnStation: {
-      type: DataTypes.TEXT,
     },
     distance: {
       type: DataTypes.INTEGER,
