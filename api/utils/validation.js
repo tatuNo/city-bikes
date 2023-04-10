@@ -1,21 +1,27 @@
+const stationBlackList = [997, 754, 999];
+
 /* eslint-disable no-restricted-globals */
 const isValidDate = (date) => date instanceof Date && !isNaN(date);
 
 const validateLine = (line) => {
   const {
-    depatureDate,
+    departureDate,
     returnDate,
-    depatureStationId,
+    departureStationId,
     returnStationId,
     distance,
     duration,
   } = line;
 
-  if (!isValidDate(depatureDate) || !isValidDate(returnDate)) {
+  if (!isValidDate(departureDate) || !isValidDate(returnDate)) {
     return false;
   }
 
-  if (depatureStationId < 0 || returnStationId < 0) {
+  if (departureStationId < 0 || returnStationId < 0) {
+    return false;
+  }
+
+  if(stationBlackList.includes(departureStationId) || stationBlackList.includes(returnStationId)) {
     return false;
   }
 
