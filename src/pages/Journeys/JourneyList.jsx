@@ -4,7 +4,7 @@ const JourneyList = ({ journeys }) => (
   <table className="w-full table-auto border-collapse text-sm">
     <thead>
       <tr>
-        <th className="border-b text-left">Depature Station</th>
+        <th className="border-b text-left">Departure Station</th>
         <th className="border-b text-left">Return Station</th>
         <th className="border-b text-left">Distance</th>
         <th className="border-b text-left">Duration</th>
@@ -14,8 +14,8 @@ const JourneyList = ({ journeys }) => (
       {journeys.map((journey) => (
         <Journey
           key={journey.id}
-          depatureStation={journey.depatureStation}
-          returnStation={journey.returnStation}
+          departureStation={journey.departureStation.name}
+          returnStation={journey.returnStation.name}
           distance={journey.distance}
           duration={journey.duration}
         />

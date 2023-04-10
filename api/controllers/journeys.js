@@ -1,7 +1,7 @@
 const { Op } = require("sequelize");
 const router = require("express").Router();
 
-const { Journey } = require("../models");
+const { Journey, Station } = require("../models");
 
 router.get("/", async (req, res) => {
   const {
@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
           },
         },
         {
-          depatureStation: {
+          departureStation: {
             [Op.iLike]: `%${station}%`,
           },
         },
@@ -48,12 +48,10 @@ router.get("/", async (req, res) => {
     : [[sort, "ASC"]];
 
   const journeys = await Journey.findAndCountAll({
-    attributes: [
-      "id",
-      "depatureStation",
-      "returnStation",
-      "distance",
-      "duration",
+    attributes: ["id", "distance", "duration"],
+    include: [
+      { model: Station, as: "departureStation" },
+      { model: Station, as: "returnStation" },
     ],
     limit,
     offset,

@@ -1,6 +1,6 @@
-const Journey = ({ depatureStation, returnStation, distance, duration }) => (
+const Journey = ({ departureStation, returnStation, distance, duration }) => (
   <tr className="text-left">
-    <td className="">{depatureStation}</td>
+    <td className="">{departureStation}</td>
     <td className="">{returnStation}</td>
     <td className="">{distance}</td>
     <td className="">{duration}</td>
