@@ -2,7 +2,6 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 const Map = ({ stations }) => {
   const position = [60.192059, 24.945831];
-  console.log(stations);
   return (
     <MapContainer
       center={position}

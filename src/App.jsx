@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Journeys, Stations } from "./pages";
+import { Journeys, Stations, Station } from "./pages";
 import Navbar from "./components/Navbar";
 
 const App = () => (
@@ -8,6 +8,7 @@ const App = () => (
     <Routes>
       <Route path="/" element={<Journeys />} />
       <Route path="/stations" element={<Stations />} />
+      <Route path="stations/:id" element={<Station />} />
     </Routes>
   </div>
 );

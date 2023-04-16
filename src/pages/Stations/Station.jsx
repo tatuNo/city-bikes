@@ -1,6 +1,10 @@
-const Station = ({ name, address }) => (
+import { Link } from "react-router-dom";
+
+const Station = ({ id, name, address }) => (
   <tr className="text-left">
-    <td className="">{name}</td>
+    <td className="">
+      <Link to={`/stations/${id}`}>{name}</Link>
+    </td>
     <td className="">{address}</td>
   </tr>
 );

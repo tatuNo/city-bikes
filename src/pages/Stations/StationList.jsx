@@ -11,6 +11,7 @@ const StationList = ({ stations }) => (
     <tbody className="bg-neutral-700">
       {stations.map((station) => (
         <Station
+          id={station.id}
           key={station.id}
           name={station.name}
           address={station.address}
