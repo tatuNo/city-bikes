@@ -30,12 +30,12 @@ router.get("/", async (req, res) => {
       ...where,
       [Op.or]: [
         {
-          returnStation: {
+          "$departureStation.name$": {
             [Op.iLike]: `%${station}%`,
           },
         },
         {
-          departureStation: {
+          "$returnStation.name$": {
             [Op.iLike]: `%${station}%`,
           },
         },
@@ -50,8 +50,16 @@ router.get("/", async (req, res) => {
   const journeys = await Journey.findAndCountAll({
     attributes: ["id", "distance", "duration"],
     include: [
-      { model: Station, as: "departureStation" },
-      { model: Station, as: "returnStation" },
+      {
+        model: Station,
+        as: "departureStation",
+        required: false,
+      },
+      {
+        model: Station,
+        as: "returnStation",
+        required: false,
+      },
     ],
     limit,
     offset,
