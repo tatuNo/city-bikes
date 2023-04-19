@@ -3,7 +3,7 @@ import { useDebounce } from "use-debounce";
 import useStations from "../../hooks/useStations";
 import StationList from "./StationList";
 import Pagination from "../../components/Pagination";
-import Map from "./Map";
+import Map from "../../components/Map";
 
 const Stations = () => {
   const [searchQuery, setSearchQuery] = useState("");
