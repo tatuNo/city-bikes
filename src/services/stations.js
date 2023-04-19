@@ -9,4 +9,9 @@ const getAll = async (params) => {
   return response;
 };
 
-export default { getAll };
+const getOne = async (id) => {
+  const response = await axios.get(`${baseUrl}/${id}`);
+  return response;
+};
+
+export default { getAll, getOne };
