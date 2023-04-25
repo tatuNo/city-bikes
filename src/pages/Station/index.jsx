@@ -1,54 +1,8 @@
 import { useParams } from "react-router-dom";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-} from "chart.js";
-import { Bar } from "react-chartjs-2";
 import Map from "../../components/Map";
 import useStation from "../../hooks/useStation";
 import Doughnuts from "./Doughnuts";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement
-);
-
-const departureOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Departures",
-    },
-  },
-};
-
-const returnOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Returns",
-    },
-  },
-};
+import Bars from "./Bars";
 
 const Station = () => {
   const id = useParams().id;
@@ -126,8 +80,7 @@ const Station = () => {
       <h2>The average distance of a journey ending at the station</h2>
       <span>{station.avgReturnDistance}</span>
       <Map stations={[station]} />
-      <Bar options={departureOptions} data={departureData} />
-      <Bar options={returnOptions} data={returnData} />
+      <Bars departureData={departureData} returnData={returnData} />
       <Doughnuts
         journeyCountData={journeyCountData}
         distanceData={distanceData}
