@@ -9,9 +9,10 @@ import {
   Legend,
   ArcElement,
 } from "chart.js";
-import { Bar, Doughnut } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import Map from "../../components/Map";
 import useStation from "../../hooks/useStation";
+import Doughnuts from "./Doughnuts";
 
 ChartJS.register(
   CategoryScale,
@@ -45,32 +46,6 @@ const returnOptions = {
     title: {
       display: true,
       text: "Returns",
-    },
-  },
-};
-
-const journeyCountDoughnutOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Total journeys",
-    },
-  },
-};
-
-const distanceDoughnutOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Average distance",
     },
   },
 };
@@ -135,6 +110,7 @@ const Station = () => {
       },
     ],
   };
+
   return (
     <div>
       <h2>Name</h2>
@@ -152,8 +128,10 @@ const Station = () => {
       <Map stations={[station]} />
       <Bar options={departureOptions} data={departureData} />
       <Bar options={returnOptions} data={returnData} />
-      <Doughnut options={journeyCountDoughnutOptions} data={journeyCountData} />
-      <Doughnut options={distanceDoughnutOptions} data={distanceData} />
+      <Doughnuts
+        journeyCountData={journeyCountData}
+        distanceData={distanceData}
+      />
     </div>
   );
 };
