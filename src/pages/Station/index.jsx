@@ -7,8 +7,9 @@ import {
   Title,
   Tooltip,
   Legend,
+  ArcElement,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Doughnut } from "react-chartjs-2";
 import Map from "../../components/Map";
 import useStation from "../../hooks/useStation";
 
@@ -18,7 +19,8 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ArcElement
 );
 
 const departureOptions = {
@@ -43,6 +45,32 @@ const returnOptions = {
     title: {
       display: true,
       text: "Returns",
+    },
+  },
+};
+
+const journeyCountDoughnutOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Total journeys",
+    },
+  },
+};
+
+const distanceDoughnutOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Average distance",
     },
   },
 };
@@ -80,6 +108,33 @@ const Station = () => {
     ],
   };
 
+  const journeyCountData = {
+    labels: ["Total departures", "Total returns"],
+    datasets: [
+      {
+        label: "Number of journeys",
+        backgroundColor: ["rgba(255, 99, 132, 0.5)", "rgba(53, 162, 235, 0.5)"],
+        data: [Number(station.departureCount), Number(station.returnCount)],
+      },
+    ],
+  };
+
+  const distanceData = {
+    labels: [
+      "The average distance of a journey starting from the station",
+      "The average distance of a journey ending at the station",
+    ],
+    datasets: [
+      {
+        label: "Distance",
+        backgroundColor: ["rgba(255, 99, 132, 0.5)", "rgba(53, 162, 235, 0.5)"],
+        data: [
+          Number(station.avgDepartureDistance),
+          Number(station.avgReturnDistance),
+        ],
+      },
+    ],
+  };
   return (
     <div>
       <h2>Name</h2>
@@ -97,6 +152,8 @@ const Station = () => {
       <Map stations={[station]} />
       <Bar options={departureOptions} data={departureData} />
       <Bar options={returnOptions} data={returnData} />
+      <Doughnut options={journeyCountDoughnutOptions} data={journeyCountData} />
+      <Doughnut options={distanceDoughnutOptions} data={distanceData} />
     </div>
   );
 };
