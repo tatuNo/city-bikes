@@ -73,7 +73,7 @@ router.get("/:id", async (req, res) => {
     attributes: [[fn("COUNT", col("returnStation.id")), "journeyCount"]],
     group: ["returnStation.id"],
     order: [[fn("COUNT", col("returnStation.id")), "DESC"]],
-    having: where(fn("COUNT", col("returnStation.id")), Op.gt, 5)
+    limit: 10,
   });
 
   const departures = await Journey.findAll({
@@ -88,7 +88,7 @@ router.get("/:id", async (req, res) => {
     attributes: [[fn("COUNT", col("departureStation.id")), "journeyCount"]],
     group: ["departureStation.id"],
     order: [[fn("COUNT", col("departureStation.id")), "DESC"]],
-    having: where(fn("COUNT", col("departureStation.id")), Op.gt, 5)
+    limit: 10,
   });
 
   res.json({

@@ -1,6 +1,51 @@
 import { useParams } from "react-router-dom";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 import Map from "../../components/Map";
 import useStation from "../../hooks/useStation";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+const departureOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Departures",
+    },
+  },
+};
+
+const returnOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Returns",
+    },
+  },
+};
 
 const Station = () => {
   const id = useParams().id;
@@ -9,6 +54,31 @@ const Station = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
+  const departures = station.departures;
+  const returns = station.returns;
+
+  const departureData = {
+    labels: departures.map((departure) => departure.departureStation.name),
+    datasets: [
+      {
+        label: "Departures",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        data: departures.map((departure) => Number(departure.journeyCount)),
+      },
+    ],
+  };
+
+  const returnData = {
+    labels: returns.map((return_) => return_.returnStation.name),
+    datasets: [
+      {
+        label: "Returns",
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        data: returns.map((return_) => Number(return_.journeyCount)),
+      },
+    ],
+  };
 
   return (
     <div>
@@ -25,6 +95,8 @@ const Station = () => {
       <h2>The average distance of a journey ending at the station</h2>
       <span>{station.avgReturnDistance}</span>
       <Map stations={[station]} />
+      <Bar options={departureOptions} data={departureData} />
+      <Bar options={returnOptions} data={returnData} />
     </div>
   );
 };
