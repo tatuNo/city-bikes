@@ -66,25 +66,20 @@ const Station = () => {
   };
 
   return (
-    <div>
-      <h2>Name</h2>
-      <span>{station.name}</span>
-      <h2>Address</h2>
-      <span>{station.address}</span>
-      <h2>Total departures</h2>
-      <span>{station.departureCount}</span>
-      <h2>The average distance of a journey starting from the station</h2>
-      <span>{station.avgDepartureDistance}</span>
-      <h2>Total returns</h2>
-      <span>{station.returnCount}</span>
-      <h2>The average distance of a journey ending at the station</h2>
-      <span>{station.avgReturnDistance}</span>
-      <Map stations={[station]} />
-      <Bars departureData={departureData} returnData={returnData} />
-      <Doughnuts
-        journeyCountData={journeyCountData}
-        distanceData={distanceData}
-      />
+    <div className="text-center">
+      <h1>
+        {station.name} - {station.address}
+      </h1>
+      <div className="grid grid-cols-1 grid-rows-1 gap-4 lg:grid-cols-[1fr,minmax(0,3fr)] lg:grid-rows-[auto,auto,auto,auto]">
+        <Doughnuts
+          journeyCountData={journeyCountData}
+          distanceData={distanceData}
+        />
+        <Bars departureData={departureData} returnData={returnData} />
+        <div className="lg:col-span-2 lg:col-start-1">
+          <Map stations={[station]} />
+        </div>
+      </div>
     </div>
   );
 };

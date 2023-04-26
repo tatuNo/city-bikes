@@ -24,6 +24,7 @@ ChartJS.register(
 
 const journeyCountDoughnutOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: "top",
@@ -37,6 +38,7 @@ const journeyCountDoughnutOptions = {
 
 const distanceDoughnutOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: "top",
@@ -70,7 +72,7 @@ const Doughnuts = ({ journeyCountData, distanceData }) => {
         selectedOption={selectedOption}
         handleRadioChange={(e) => setSelectedOption(e.target.value)}
       />
-      {doughnutElement}
+      <div className="h-96">{doughnutElement}</div>
     </div>
   );
 };

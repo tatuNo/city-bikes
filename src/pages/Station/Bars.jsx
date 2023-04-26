@@ -24,6 +24,7 @@ ChartJS.register(
 
 const departureOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: "top",
@@ -37,6 +38,7 @@ const departureOptions = {
 
 const returnOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: "top",
@@ -70,7 +72,7 @@ const Bars = ({ departureData, returnData }) => {
         selectedOption={selectedOption}
         handleRadioChange={(e) => setSelectedOption(e.target.value)}
       />
-      {barsElement}
+      <div className="h-96">{barsElement}</div>
     </div>
   );
 };
