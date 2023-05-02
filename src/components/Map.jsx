@@ -16,8 +16,20 @@ const drawOptions = {
   circlemarker: false,
 };
 
-const Map = ({ stations }) => {
+const Map = ({ stations, setCircle, controls }) => {
   const position = [60.192059, 24.945831];
+
+  const handleCreated = (e) => {
+    const layerType = e.layerType;
+    if (layerType === "circle") {
+      const circleLayer = e.layer;
+      setCircle({
+        lat: circleLayer.getLatLng().lat,
+        lng: circleLayer.getLatLng().lng,
+        radius: circleLayer.getRadius(),
+      });
+    }
+  };
 
   return (
     <MapContainer
@@ -26,9 +38,15 @@ const Map = ({ stations }) => {
       scrollWheelZoom={false}
       className="h-96 w-full"
     >
-      <FeatureGroup>
-        <EditControl position="topright" draw={drawOptions} />
-      </FeatureGroup>
+      {controls && (
+        <FeatureGroup>
+          <EditControl
+            position="topright"
+            draw={drawOptions}
+            onCreated={handleCreated}
+          />
+        </FeatureGroup>
+      )}
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

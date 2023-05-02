@@ -9,9 +9,11 @@ const Stations = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [search] = useDebounce(searchQuery, 500);
   const [offset, setOffset] = useState(0);
+  const [circle, setCircle] = useState(null);
   const { stations, isLoading } = useStations({
     offset,
     search: search === "" ? null : search,
+    circle,
   });
 
   if (isLoading) {
@@ -31,7 +33,7 @@ const Stations = () => {
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <StationList stations={stations.rows} />
-      <Map stations={stations.rows}/>
+      <Map stations={stations.rows} setCircle={setCircle} controls={true} />
       <Pagination itemCount={itemCount} setOffset={setOffset} />
     </div>
   );
