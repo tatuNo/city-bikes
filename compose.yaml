@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres
+    image: postgis/postgis
     restart: unless-stopped
     environment:
       - POSTGRES_USER=postgres
@@ -12,7 +12,7 @@ services:
       - ./api/database:/var/lib/postgresql/data
     container_name: database
   test-db:
-    image: postgres
+    image: postgis/postgis
     restart: unless-stopped
     environment:
       - POSTGRES_USER=postgres

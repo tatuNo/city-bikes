@@ -1,10 +1,10 @@
-const { Op, fn, col, literal, where } = require("sequelize");
+const { Op, fn, col, literal } = require("sequelize");
 const router = require("express").Router();
 
 const { Station, Journey } = require("../models");
 
 router.get("/", async (req, res) => {
-  const { limit = 10, offset = 0, search } = req.query;
+  const { limit = 10, offset = 0, search, circle } = req.query;
   let where = {};
 
   if (search) {
@@ -24,19 +24,33 @@ router.get("/", async (req, res) => {
     };
   }
 
+  if (circle) {
+    const { lat, lng, radius } = circle;
+    where = {
+      ...where,
+      [Op.and]: [
+        literal(`ST_Distance(
+          ST_MakePoint("x_coordinate", "y_coordinate")::geography,
+          ST_MakePoint(${lng}, ${lat})::geography
+        ) <= ${radius}`),
+      ],
+    };
+  }
+
   const stations = await Station.findAndCountAll({
     attributes: ["id", "name", "address", "xCoordinate", "yCoordinate"],
     limit,
     offset,
     where,
   });
+
   res.json(stations);
 });
 
 router.get("/:id", async (req, res) => {
   const station = await Station.findByPk(req.params.id, {
-    attributes: ["name", "address", "xCoordinate", "yCoordinate"],
-    raw: true
+    attributes: ["id", "name", "address", "xCoordinate", "yCoordinate"],
+    raw: true,
   });
 
   const departureCount = await Journey.count({

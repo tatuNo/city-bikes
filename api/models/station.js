@@ -17,13 +17,12 @@ Station.init(
       type: DataTypes.STRING,
     },
     xCoordinate: {
-      type: DataTypes.STRING,
+      type: DataTypes.DOUBLE,
     },
     yCoordinate: {
-      type: DataTypes.STRING,
+      type: DataTypes.DOUBLE,
     },
-  },
-  {
+  },  {
     sequelize,
     underscored: true,
     modelName: "station",
