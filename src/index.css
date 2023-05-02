@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+ul.leaflet-draw-actions.leaflet-draw-actions-bottom li a[title="Save changes"] {
+  display: none;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

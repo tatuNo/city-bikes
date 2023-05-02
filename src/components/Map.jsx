@@ -6,7 +6,10 @@ import {
   Popup,
   FeatureGroup,
 } from "react-leaflet";
+import L from "leaflet";
 import { EditControl } from "react-leaflet-draw";
+
+L.drawLocal.draw.toolbar.buttons.circle = "Select area to find stations";
 
 const drawOptions = {
   circle: true,
@@ -53,6 +56,8 @@ const Map = ({ stations, setCircle, controls }) => {
             position="topright"
             draw={drawOptions}
             onCreated={handleCreated}
+            onDeleted={() => setCircle(null)}
+            edit={{ edit: false }}
           />
         </FeatureGroup>
       )}
