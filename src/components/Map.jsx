@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -18,11 +19,19 @@ const drawOptions = {
 
 const Map = ({ stations, setCircle, controls }) => {
   const position = [60.192059, 24.945831];
+  const drawnCircleRef = useRef(null);
 
   const handleCreated = (e) => {
     const layerType = e.layerType;
     if (layerType === "circle") {
       const circleLayer = e.layer;
+
+      if (drawnCircleRef.current) {
+        drawnCircleRef.current.remove();
+      }
+
+      drawnCircleRef.current = circleLayer;
+
       setCircle({
         lat: circleLayer.getLatLng().lat,
         lng: circleLayer.getLatLng().lng,
