@@ -23,7 +23,7 @@ const Stations = () => {
   const itemCount = stations.count;
 
   return (
-    <div>
+    <div className="flex flex-1 flex-col">
       <input
         name="search"
         className="text-black"

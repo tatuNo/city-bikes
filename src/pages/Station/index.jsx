@@ -66,11 +66,11 @@ const Station = () => {
   };
 
   return (
-    <div className="text-center">
+    <div className="flex flex-1 flex-col text-center">
       <h1>
         {station.name} - {station.address}
       </h1>
-      <div className="grid grid-cols-1 grid-rows-1 gap-4 lg:grid-cols-[1fr,minmax(0,3fr)] lg:grid-rows-[auto,auto,auto,auto]">
+      <div className="grid flex-1 grid-cols-1 grid-rows-1 gap-4 lg:grid-cols-[1fr,minmax(0,3fr)] lg:grid-rows-[auto,auto,auto,auto]">
         <Doughnuts
           journeyCountData={journeyCountData}
           distanceData={distanceData}

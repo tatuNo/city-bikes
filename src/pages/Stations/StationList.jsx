@@ -1,7 +1,7 @@
 import Station from "./Station";
 
 const StationList = ({ stations }) => (
-  <table className="w-full table-auto border-collapse text-sm">
+  <table className="w-full flex-1 table-auto border-collapse text-sm">
     <thead>
       <tr>
         <th className="border-b text-left">Name</th>

@@ -10,7 +10,7 @@ const Pagination = ({ itemCount, setOffset }) => {
   };
 
   return (
-    <div className="flex flex-1 flex-col-reverse  items-center justify-between text-left md:flex-row">
+    <div className="flex flex-col-reverse items-center text-left md:flex-row md:justify-between">
       <div>
         <p className="text-sm">Showing X to Y of {itemCount} results</p>
       </div>

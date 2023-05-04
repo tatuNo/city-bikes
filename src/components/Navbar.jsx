@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Navbar = () => (
-  <header>
+  <header className="sticky w-full">
     <nav>
       <ul className="flex justify-center gap-3">
         <li>
