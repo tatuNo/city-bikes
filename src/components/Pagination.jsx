@@ -1,6 +1,16 @@
+import { useState } from "react";
 import ReactPaginate from "react-paginate";
+import RadioGroup from "./RadioGroup";
+
+const options = [
+  { label: "10", value: "10" },
+  { label: "30", value: "30" },
+  { label: "50", value: "50" },
+  { label: "100", value: "100" },
+];
 
 const Pagination = ({ itemCount, setOffset }) => {
+  const [selectedOption, setSelectedOption] = useState("10");
   const itemsPerPage = 10;
   const pageCount = Math.ceil(itemCount / itemsPerPage);
 
@@ -10,25 +20,33 @@ const Pagination = ({ itemCount, setOffset }) => {
   };
 
   return (
-    <div className="flex flex-col-reverse items-center bg-seondary p-4 text-left md:flex-row md:justify-between">
-      <div>
+    <div className="flex flex-col-reverse items-center gap-6 bg-seondary p-4 text-left lg:flex-row lg:justify-between">
+      <div className="order-1 lg:order-1">
         <p className="text-sm">Showing X to Y of {itemCount} results</p>
       </div>
       <ReactPaginate
-        containerClassName="isolate inline-flex -space-x-px rounded-md shadow-sm"
+        containerClassName="order-3 lg:order-2 isolate inline-flex -space-x-px rounded-md shadow-sm"
         pageClassName="relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white"
         previousClassName="relative z-10 inline-flex items-center bg-orange px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white"
         nextClassName="relative z-10 inline-flex items-center bg-orange px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white"
         breakClassName="relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white"
         activeClassName="relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 bg-lightorange text-sm font-semibold text-white"
         breakLabel="..."
-        nextLabel="-->"
+        nextLabel=">"
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
         pageCount={pageCount}
-        previousLabel="<--"
+        previousLabel="<"
         renderOnZeroPageCount={null}
       />
+      <div className="order-2 flex items-center lg:order-3">
+        <span>Per page</span>
+        <RadioGroup
+          options={options}
+          selectedOption={selectedOption}
+          handleRadioChange={(e) => setSelectedOption(e.target.value)}
+        />
+      </div>
     </div>
   );
 };

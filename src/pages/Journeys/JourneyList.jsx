@@ -1,7 +1,7 @@
 import Journey from "./Journey";
 
 const JourneyList = ({ journeys }) => (
-  <table className="w-full flex-1 table-auto border-collapse text-sm">
+  <table className="w-full flex-1 basis-4/6 table-auto border-collapse text-sm">
     <thead>
       <tr>
         <th className="border-b text-center">Departure Station</th>
