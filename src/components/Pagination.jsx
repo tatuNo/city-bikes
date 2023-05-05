@@ -2,16 +2,14 @@ import { useState } from "react";
 import ReactPaginate from "react-paginate";
 import RadioGroup from "./RadioGroup";
 
-const options = [
-  { label: "10", value: "10" },
-  { label: "30", value: "30" },
-  { label: "50", value: "50" },
-  { label: "100", value: "100" },
-];
-
-const Pagination = ({ itemCount, setOffset }) => {
-  const [selectedOption, setSelectedOption] = useState("10");
-  const itemsPerPage = 10;
+const Pagination = ({
+  itemCount,
+  setOffset,
+  limit,
+  setLimit,
+  limitOptions,
+}) => {
+  const itemsPerPage = Number(limit);
   const pageCount = Math.ceil(itemCount / itemsPerPage);
 
   const handlePageClick = (event) => {
@@ -42,9 +40,9 @@ const Pagination = ({ itemCount, setOffset }) => {
       <div className="order-2 flex items-center lg:order-3">
         <span>Per page</span>
         <RadioGroup
-          options={options}
-          selectedOption={selectedOption}
-          handleRadioChange={(e) => setSelectedOption(e.target.value)}
+          options={limitOptions}
+          selectedOption={limit}
+          handleRadioChange={(e) => setLimit(e.target.value)}
         />
       </div>
     </div>

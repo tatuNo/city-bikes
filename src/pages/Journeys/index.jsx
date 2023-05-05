@@ -5,14 +5,23 @@ import JourneyList from "./JourneyList";
 import SearchFilters from "./SearchFilters";
 import Pagination from "../../components/Pagination";
 
+const limitOptions = [
+  { label: "10", value: "10" },
+  { label: "30", value: "30" },
+  { label: "50", value: "50" },
+  { label: "100", value: "100" },
+];
+
 const Journeys = () => {
   const [offset, setOffset] = useState(0);
   const [sort, setSort] = useState("id");
   const [search, setSearch] = useState({});
+  const [limit, setLimit] = useState("10");
   const { journeys, isLoading } = useJourneys({
     offset,
     sort,
     ...search,
+    limit,
   });
 
   if (isLoading) {
@@ -28,7 +37,13 @@ const Journeys = () => {
         <JourneyList className="flex-1" journeys={journeys.rows} />
       </div>
       <div>
-        <Pagination itemCount={itemCount} setOffset={setOffset} />
+        <Pagination
+          itemCount={itemCount}
+          setOffset={setOffset}
+          limit={limit}
+          setLimit={setLimit}
+          limitOptions={limitOptions}
+        />
       </div>
     </div>
   );
