@@ -5,15 +5,24 @@ import StationList from "./StationList";
 import Pagination from "../../components/Pagination";
 import Map from "../../components/Map";
 
+const limitOptions = [
+  { label: "10", value: "10" },
+  { label: "30", value: "30" },
+  { label: "50", value: "50" },
+  { label: "100", value: "100" },
+];
+
 const Stations = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [search] = useDebounce(searchQuery, 500);
   const [offset, setOffset] = useState(0);
   const [circle, setCircle] = useState(null);
+  const [limit, setLimit] = useState("10");
   const { stations, isLoading } = useStations({
     offset,
     search: search === "" ? null : search,
     circle,
+    limit,
   });
 
   if (isLoading) {
@@ -38,7 +47,13 @@ const Stations = () => {
         <StationList stations={stations.rows} />
         <Map stations={stations.rows} setCircle={setCircle} controls={true} />
       </div>
-      <Pagination itemCount={itemCount} setOffset={setOffset} />
+      <Pagination
+        itemCount={itemCount}
+        setOffset={setOffset}
+        limit={limit}
+        setLimit={setLimit}
+        limitOptions={limitOptions}
+      />
     </div>
   );
 };
