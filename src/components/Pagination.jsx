@@ -10,23 +10,23 @@ const Pagination = ({ itemCount, setOffset }) => {
   };
 
   return (
-    <div className="flex flex-col-reverse items-center text-left md:flex-row md:justify-between">
+    <div className="flex flex-col-reverse items-center bg-seondary p-4 text-left md:flex-row md:justify-between">
       <div>
         <p className="text-sm">Showing X to Y of {itemCount} results</p>
       </div>
       <ReactPaginate
         containerClassName="isolate inline-flex -space-x-px rounded-md shadow-sm"
-        pageClassName="relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
-        previousClassName="relative z-10 inline-flex items-center bg-orange-600 px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        nextClassName="relative z-10 inline-flex items-center bg-orange-600 px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        breakClassName="relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
-        activeClassName="relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 bg-orange-300 text-sm font-semibold text-white ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
+        pageClassName="relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white"
+        previousClassName="relative z-10 inline-flex items-center bg-orange px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white"
+        nextClassName="relative z-10 inline-flex items-center bg-orange px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white"
+        breakClassName="relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white"
+        activeClassName="relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 bg-lightorange text-sm font-semibold text-white"
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel="-->"
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
         pageCount={pageCount}
-        previousLabel="< previous"
+        previousLabel="<--"
         renderOnZeroPageCount={null}
       />
     </div>

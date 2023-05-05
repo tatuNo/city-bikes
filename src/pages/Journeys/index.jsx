@@ -23,7 +23,7 @@ const Journeys = () => {
 
   return (
     <div className="flex flex-1 flex-col text-center">
-      <div className="flex flex-1 flex-col bg-neutral-700 md:flex-row">
+      <div className="flex flex-1 flex-col gap-10 p-6 md:flex-row">
         <SearchFilters setSort={setSort} setSearch={setSearch} />
         <JourneyList className="flex-1" journeys={journeys.rows} />
       </div>

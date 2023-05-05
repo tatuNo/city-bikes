@@ -1,10 +1,10 @@
 const Sort = ({ setSort }) => (
-  <div>
-    <label htmlFor="sort">
+  <div className="mb-10  justify-self-end">
+    <label className="text-sm font-bold" htmlFor="sort">
       Order
       <select
         id="sort"
-        className="focus:shadow-outline block w-full rounded border border-gray-400 bg-white leading-tight text-black shadow focus:outline-none"
+        className="block w-full rounded border bg-seondary py-2 px-3"
         onChange={(e) => setSort(e.target.value)}
       >
         <option value="id">id</option>

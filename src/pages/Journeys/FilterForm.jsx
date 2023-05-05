@@ -70,9 +70,9 @@ const FilterForm = ({ setSearch }) => {
       >
         {({ handleSubmit }) => (
           <Form>
-            <div>
+            <div className="flex flex-col gap-10">
               <TextField name="station" type="text" label="Station" />
-              <div className="flex">
+              <div className="flex gap-4">
                 <TextField
                   name="minDistance"
                   type="number"
@@ -84,7 +84,7 @@ const FilterForm = ({ setSearch }) => {
                   label="Max distance"
                 />
               </div>
-              <div className="flex">
+              <div className="flex gap-4">
                 <TextField
                   name="minDuration"
                   type="number"
@@ -98,14 +98,14 @@ const FilterForm = ({ setSearch }) => {
               </div>
               <div>
                 <button
-                  className="mr-2 mb-2 w-full flex-1 rounded-lg bg-orange-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                  className="mr-2 mb-2 w-full flex-1 rounded-lg bg-orange px-5 py-2.5 text-sm font-medium text-white"
                   type="button"
                   onClick={handleSubmit}
                 >
                   Apply
                 </button>
                 <button
-                  className="gb-red-700 mr-2 mb-2 w-full flex-1 rounded-lg bg-orange-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                  className="gb-red-700 mr-2 mb-2 w-full flex-1 rounded-lg bg-orange px-5 py-2.5 text-sm font-medium text-white"
                   type="button"
                 >
                   Reset filters

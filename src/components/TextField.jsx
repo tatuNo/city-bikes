@@ -1,21 +1,21 @@
 import { useField } from "formik";
 
 const TextField = ({ label, ...props }) => {
-  const [field, meta, helpers] = useField(props);
+  const [field, meta] = useField(props);
   return (
-    <>
-      <label className="mb-2 block text-sm font-bold">
+    <div className="flex-1">
+      <label className="block text-sm font-bold">
         {label}
         <input
-          className="focus:shadow-outline w-full appearance-none rounded border py-2 px-3 leading-tight shadow focus:outline-none text-black"
+          className="text-black w-full rounded border bg-seondary py-2 px-3"
           {...field}
           {...props}
         />
       </label>
       {meta.touched && meta.error ? (
-        <div className="text-red-600">{meta.error}</div>
+        <div className="text-red">{meta.error}</div>
       ) : null}
-    </>
+    </div>
   );
 };
 
