@@ -7,7 +7,7 @@ const TextField = ({ label, ...props }) => {
       <label className="block text-sm font-bold">
         {label}
         <input
-          className="text-black w-full rounded border bg-seondary py-2 px-3"
+          className="w-full rounded border bg-seondary py-2 px-3"
           {...field}
           {...props}
         />

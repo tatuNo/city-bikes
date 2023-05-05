@@ -23,17 +23,21 @@ const Stations = () => {
   const itemCount = stations.count;
 
   return (
-    <div className="flex flex-1 flex-col">
-      <input
-        name="search"
-        className="text-black"
-        defaultValue={null}
-        type="search"
-        placeholder="Search"
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-      <StationList stations={stations.rows} />
-      <Map stations={stations.rows} setCircle={setCircle} controls={true} />
+    <div className="flex flex-1 flex-col text-center">
+      <div className="flex flex-1 flex-col gap-6 p-6">
+        <div className="text-left">
+          <input
+            name="search"
+            className="rounded border bg-seondary py-2 px-3"
+            defaultValue={null}
+            type="search"
+            placeholder="Search"
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+        <StationList stations={stations.rows} />
+        <Map stations={stations.rows} setCircle={setCircle} controls={true} />
+      </div>
       <Pagination itemCount={itemCount} setOffset={setOffset} />
     </div>
   );

@@ -10,7 +10,7 @@ const JourneyList = ({ journeys }) => (
         <th className="border-b text-center">Duration</th>
       </tr>
     </thead>
-    <tbody className="bg-neutral-700">
+    <tbody>
       {journeys.map((journey) => (
         <Journey
           key={journey.id}
