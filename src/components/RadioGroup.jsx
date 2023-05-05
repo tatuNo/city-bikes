@@ -15,12 +15,18 @@ const RadioOption = ({ option, selectedOption, handleRadioChange }) => (
   >
     <input
       type="radio"
-      className="form-radio h-4 w-4"
+      className="hidden"
       value={option.value}
       checked={selectedOption === option.value}
       onChange={handleRadioChange}
     />
-    <span>{option.label}</span>
+    <span
+      className={`${
+        selectedOption === option.value ? "bg-orange" : "bg-secondary"
+      } rounded-md border border-orange px-4 py-2`}
+    >
+      {option.label}
+    </span>
   </label>
 );
 
