@@ -8,6 +8,7 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import { EditControl } from "react-leaflet-draw";
+import { Link } from "react-router-dom";
 
 L.drawLocal.draw.toolbar.buttons.circle = "Select area to find stations";
 
@@ -70,7 +71,9 @@ const Map = ({ stations, setCircle, controls }) => {
           key={station.id}
           position={[station.yCoordinate, station.xCoordinate]}
         >
-          <Popup>{station.name}</Popup>
+          <Popup>
+            <Link to={`/stations/${station.id}`}>{station.name}</Link>
+          </Popup>
         </Marker>
       ))}
     </MapContainer>
