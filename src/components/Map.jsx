@@ -21,8 +21,7 @@ const drawOptions = {
   circlemarker: false,
 };
 
-const Map = ({ stations, setCircle, controls }) => {
-  const position = [60.192059, 24.945831];
+const Map = ({ stations, setCircle, controls, center }) => {
   const drawnCircleRef = useRef(null);
 
   const handleCreated = (e) => {
@@ -46,7 +45,7 @@ const Map = ({ stations, setCircle, controls }) => {
 
   return (
     <MapContainer
-      center={position}
+      center={center}
       zoom={11}
       scrollWheelZoom={false}
       className="h-96 w-full"

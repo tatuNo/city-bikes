@@ -45,7 +45,12 @@ const Stations = () => {
           />
         </div>
         <StationList stations={stations.rows} />
-        <Map stations={stations.rows} setCircle={setCircle} controls={true} />
+        <Map
+          stations={stations.rows}
+          setCircle={setCircle}
+          controls={true}
+          center={[60.192059, 24.945831]}
+        />
       </div>
       <Pagination
         itemCount={itemCount}

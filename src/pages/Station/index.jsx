@@ -77,7 +77,10 @@ const Station = () => {
         />
         <Bars departureData={departureData} returnData={returnData} />
         <div className="lg:col-span-2 lg:col-start-1">
-          <Map stations={[station]} />
+          <Map
+            stations={[station]}
+            center={[station.yCoordinate, station.xCoordinate]}
+          />
         </div>
       </div>
     </div>
