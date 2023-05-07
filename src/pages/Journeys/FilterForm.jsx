@@ -60,6 +60,8 @@ const FilterForm = ({ setSearch }) => {
     setSearch(search);
   };
 
+  const onReset = () => setSearch({});
+
   return (
     <div>
       <Formik
@@ -67,8 +69,9 @@ const FilterForm = ({ setSearch }) => {
         onSubmit={onSubmit}
         validationSchema={validationSchema}
         className="mb-4 flex flex-row rounded"
+        onReset={onReset}
       >
-        {({ handleSubmit }) => (
+        {({ handleSubmit, resetForm }) => (
           <Form>
             <div className="flex flex-col gap-10">
               <TextField name="station" type="text" label="Station" />
@@ -107,6 +110,7 @@ const FilterForm = ({ setSearch }) => {
                 <button
                   className="gb-red-700 mr-2 mb-2 w-full flex-1 rounded-lg bg-orange px-5 py-2.5 text-sm font-medium text-white"
                   type="button"
+                  onClick={resetForm}
                 >
                   Reset filters
                 </button>

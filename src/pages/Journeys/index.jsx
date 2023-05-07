@@ -17,7 +17,7 @@ const Journeys = () => {
   const [sort, setSort] = useState("id");
   const [search, setSearch] = useState({});
   const [limit, setLimit] = useState("10");
-  const { journeys, isLoading } = useJourneys({
+  const { journeys, isLoading, isFetching } = useJourneys({
     offset,
     sort,
     ...search,
@@ -34,7 +34,11 @@ const Journeys = () => {
     <div className="flex flex-1 flex-col text-center">
       <div className="flex flex-1 flex-col gap-10 p-6 lg:flex-row">
         <SearchFilters setSort={setSort} setSearch={setSearch} />
-        <JourneyList className="flex-1" journeys={journeys.rows} />
+        <JourneyList
+          className="flex-1"
+          journeys={journeys.rows}
+          isFetching={isFetching}
+        />
       </div>
       <div>
         <Pagination
