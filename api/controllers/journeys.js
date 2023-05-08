@@ -3,6 +3,17 @@ const router = require("express").Router();
 
 const { Journey, Station } = require("../models");
 
+const parseSortParam = (sort) => {
+  const direction = sort.startsWith("-") ? "DESC" : "ASC";
+  const field = sort.startsWith("-") ? sort.slice(1) : sort;
+
+  if (field === "returnStation" || field === "departureStation") {
+    return [[field, "name", direction]];
+  }
+
+  return [[field, direction]];
+};
+
 router.get("/", async (req, res) => {
   const {
     limit = 10,
@@ -12,6 +23,7 @@ router.get("/", async (req, res) => {
     duration,
     station,
   } = req.query;
+  const order = parseSortParam(sort);
 
   let where = {};
 
@@ -42,10 +54,6 @@ router.get("/", async (req, res) => {
       ],
     };
   }
-
-  const order = sort.startsWith("-")
-    ? [[sort.slice(1), "DESC"]]
-    : [[sort, "ASC"]];
 
   const journeys = await Journey.findAndCountAll({
     attributes: ["id", "distance", "duration"],
