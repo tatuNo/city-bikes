@@ -14,7 +14,7 @@ const limitOptions = [
 
 const Journeys = () => {
   const [offset, setOffset] = useState(0);
-  const [sort, setSort] = useState("id");
+  const [sort, setSort] = useState(undefined);
   const [search, setSearch] = useState({});
   const [limit, setLimit] = useState("10");
   const { journeys, isLoading, isFetching } = useJourneys({
@@ -38,6 +38,8 @@ const Journeys = () => {
           className="flex-1"
           journeys={journeys.rows}
           isFetching={isFetching}
+          sort={sort}
+          setSort={setSort}
         />
       </div>
       <div>
