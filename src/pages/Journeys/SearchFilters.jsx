@@ -1,12 +1,10 @@
 import FilterForm from "./FilterForm";
-import Sort from "./Sort";
 
-const SearchFilters = ({ setSort, setSearch }) => {
+const SearchFilters = ({ setSearch }) => {
   return (
-    <div className="flex flex-col basis-2/6">
-      <h2 className="pb-4 font-bold">Filters</h2>
-      <div className="flex flex-1 flex-col justify-center">
-        <Sort setSort={setSort} />
+    <div className="flex basis-2/6 flex-col gap-12">
+      <h2 className="font-bold">Filters</h2>
+      <div className="flex flex-1 flex-col">
         <FilterForm setSearch={setSearch} />
       </div>
     </div>
