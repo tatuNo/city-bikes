@@ -6,7 +6,7 @@ import {
   Popup,
   FeatureGroup,
 } from "react-leaflet";
-import L from "leaflet";
+import L, { icon } from "leaflet";
 import { EditControl } from "react-leaflet-draw";
 import { Link } from "react-router-dom";
 
@@ -19,6 +19,18 @@ const drawOptions = {
   polygon: false,
   marker: false,
   circlemarker: false,
+};
+
+const createCustomIcon = (color) => {
+  return icon({
+    iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color}.png`,
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+  });
 };
 
 const Map = ({ stations, setCircle, controls, center }) => {
@@ -69,6 +81,11 @@ const Map = ({ stations, setCircle, controls, center }) => {
         <Marker
           key={station.id}
           position={[station.yCoordinate, station.xCoordinate]}
+          icon={
+            station.markerColor
+              ? createCustomIcon(station.markerColor)
+              : createCustomIcon("black")
+          }
         >
           <Popup>
             <Link to={`/stations/${station.id}`}>{station.name}</Link>

@@ -29,7 +29,7 @@ const Station = () => {
     datasets: [
       {
         label: "Departures",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        backgroundColor: "#CB2B3E",
         data: departures.map((departure) => Number(departure.journeyCount)),
       },
     ],
@@ -40,7 +40,7 @@ const Station = () => {
     datasets: [
       {
         label: "Returns",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        backgroundColor: "#2A81CB",
         data: returns.map((return_) => Number(return_.journeyCount)),
       },
     ],
@@ -51,7 +51,7 @@ const Station = () => {
     datasets: [
       {
         label: "Number of journeys",
-        backgroundColor: ["rgba(255, 99, 132, 0.5)", "rgba(53, 162, 235, 0.5)"],
+        backgroundColor: ["#CB2B3E", "#2A81CB"],
         data: [Number(station.departureCount), Number(station.returnCount)],
       },
     ],
@@ -65,7 +65,7 @@ const Station = () => {
     datasets: [
       {
         label: "Distance",
-        backgroundColor: ["rgba(255, 99, 132, 0.5)", "rgba(53, 162, 235, 0.5)"],
+        backgroundColor: ["#CB2B3E", "#2A81CB"],
         data: [
           Number(station.avgDepartureDistance),
           Number(station.avgReturnDistance),
@@ -80,10 +80,14 @@ const Station = () => {
       return;
     }
 
-    const stationsToAdd =
+    const stationsToAdd = (
       selectedBarOption === "departures"
         ? station.departures.map((d) => d.departureStation)
-        : station.returns.map((r) => r.returnStation);
+        : station.returns.map((r) => r.returnStation)
+    ).map((s) => ({
+      ...s,
+      markerColor: selectedBarOption === "departures" ? "red" : "blue",
+    }));
 
     const filteredStations = stationsToAdd.filter((s) => s.id !== station.id);
     setStations([...stations, ...filteredStations]);
