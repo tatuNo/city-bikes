@@ -10,6 +10,7 @@ import {
   ArcElement,
 } from "chart.js";
 import RadioGroup from "../../components/RadioGroup";
+import Checkbox from "../../components/Checkbox";
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
@@ -55,9 +56,13 @@ const options = [
   { label: "Returns", value: "returns" },
 ];
 
-const Bars = ({ departureData, returnData }) => {
-  const [selectedOption, setSelectedOption] = useState("departures");
-
+const Bars = ({
+  departureData,
+  returnData,
+  handleCheckboxChange,
+  selectedOption,
+  setSelectedOption,
+}) => {
   const barsElement =
     selectedOption === "departures" ? (
       <Bar options={departureOptions} data={departureData} />
@@ -67,11 +72,16 @@ const Bars = ({ departureData, returnData }) => {
 
   return (
     <div>
-      <RadioGroup
-        options={options}
-        selectedOption={selectedOption}
-        handleRadioChange={(e) => setSelectedOption(e.target.value)}
-      />
+      <div className="flex flex-col items-center justify-between lg:flex-row">
+        <Checkbox label="Show on the map" onChange={handleCheckboxChange} />
+        <div className="mx-auto">
+          <RadioGroup
+            options={options}
+            selectedOption={selectedOption}
+            handleRadioChange={(e) => setSelectedOption(e.target.value)}
+          />
+        </div>
+      </div>
       <div className="h-96">{barsElement}</div>
     </div>
   );

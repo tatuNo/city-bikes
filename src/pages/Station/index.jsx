@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Map from "../../components/Map";
 import useStation from "../../hooks/useStation";
@@ -7,6 +8,14 @@ import Bars from "./Bars";
 const Station = () => {
   const id = useParams().id;
   const { isLoading, station } = useStation(id);
+  const [selectedBarOption, setSelectedBarOption] = useState("departures");
+  const [stations, setStations] = useState([]);
+
+  useEffect(() => {
+    if (station) {
+      setStations([station]);
+    }
+  }, [station]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -65,6 +74,21 @@ const Station = () => {
     ],
   };
 
+  const handleCheckboxChange = (checked) => {
+    if (!checked) {
+      setStations([station]);
+      return;
+    }
+
+    const stationsToAdd =
+      selectedBarOption === "departures"
+        ? station.departures.map((d) => d.departureStation)
+        : station.returns.map((r) => r.returnStation);
+
+    const filteredStations = stationsToAdd.filter((s) => s.id !== station.id);
+    setStations([...stations, ...filteredStations]);
+  };
+
   return (
     <div className="flex flex-1 flex-col gap-10 p-6 text-center">
       <h1 className="text-2xl">
@@ -75,10 +99,16 @@ const Station = () => {
           journeyCountData={journeyCountData}
           distanceData={distanceData}
         />
-        <Bars departureData={departureData} returnData={returnData} />
+        <Bars
+          departureData={departureData}
+          returnData={returnData}
+          handleCheckboxChange={handleCheckboxChange}
+          selectedOption={selectedBarOption}
+          setSelectedOption={setSelectedBarOption}
+        />
         <div className="lg:col-span-2 lg:col-start-1">
           <Map
-            stations={[station]}
+            stations={stations}
             center={[station.yCoordinate, station.xCoordinate]}
           />
         </div>
