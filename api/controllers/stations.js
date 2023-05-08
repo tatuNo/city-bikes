@@ -81,7 +81,7 @@ router.get("/:id", async (req, res) => {
       {
         model: Station,
         as: "returnStation",
-        attributes: ["name", "address", "id"],
+        attributes: ["name", "address", "id", "yCoordinate", "xCoordinate"],
       },
     ],
     attributes: [[fn("COUNT", col("returnStation.id")), "journeyCount"]],
@@ -96,7 +96,7 @@ router.get("/:id", async (req, res) => {
       {
         model: Station,
         as: "departureStation",
-        attributes: ["name", "address", "id"],
+        attributes: ["name", "address", "id", "yCoordinate", "xCoordinate"],
       },
     ],
     attributes: [[fn("COUNT", col("departureStation.id")), "journeyCount"]],
