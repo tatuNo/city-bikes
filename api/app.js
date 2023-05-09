@@ -19,6 +19,4 @@ const start = async () => {
   await connectToDatabase();
 };
 
-start();
-
-module.exports = app;
+module.exports = { app, start };

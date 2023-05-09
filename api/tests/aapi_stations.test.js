@@ -1,13 +1,14 @@
 const supertest = require("supertest");
 
 const { sequelize } = require("../utils/db");
-const app = require("../app");
+const { app, start } = require("../app");
 const { Station } = require("../models");
 const { initialStations } = require("./test_helper");
 
 const api = supertest(app);
 
 beforeAll(async () => {
+  await start();
   await Station.destroy({ where: {} });
   await Station.bulkCreate(initialStations);
 });
