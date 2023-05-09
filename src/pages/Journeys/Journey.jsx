@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { metersToKilometers, secondsToMinutes } from "../../util/helpers";
 
 const Journey = ({ departureStation, returnStation, distance, duration }) => (
-  <tr className="text-center">
+  <tr className="h-12 text-center">
     <td className="h-4 cursor-pointer border border-white p-0 hover:bg-seondary">
       <Link
         to={`/stations/${departureStation.id}`}
