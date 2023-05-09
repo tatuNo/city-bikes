@@ -40,7 +40,7 @@ const JourneyList = ({ journeys, isFetching, sort, setSort }) => {
             onClick={() => handleSort("distance")}
           >
             <div className="flex flex-col items-center justify-center gap-2 sm:flex-row">
-              Distance {getSortIcon("distance")}
+              Distance (km) {getSortIcon("distance")}
             </div>
           </th>
           <th
@@ -48,7 +48,7 @@ const JourneyList = ({ journeys, isFetching, sort, setSort }) => {
             onClick={() => handleSort("duration")}
           >
             <div className="flex flex-col items-center justify-center gap-2 sm:flex-row">
-              Duration {getSortIcon("duration")}
+              Duration (min) {getSortIcon("duration")}
             </div>
           </th>
         </tr>

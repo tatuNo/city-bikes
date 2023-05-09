@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { metersToKilometers, secondsToMinutes } from "../../util/helpers";
 
 const Journey = ({ departureStation, returnStation, distance, duration }) => (
   <tr className="text-center">
@@ -18,8 +19,8 @@ const Journey = ({ departureStation, returnStation, distance, duration }) => (
         {returnStation.name}
       </Link>
     </td>
-    <td className="border border-white">{distance}</td>
-    <td className="border border-white">{duration}</td>
+    <td className="border border-white">{metersToKilometers(distance)}</td>
+    <td className="border border-white">{secondsToMinutes(duration)}</td>
   </tr>
 );
 

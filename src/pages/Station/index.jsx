@@ -4,6 +4,7 @@ import Map from "../../components/Map";
 import useStation from "../../hooks/useStation";
 import Doughnuts from "./Doughnuts";
 import Bars from "./Bars";
+import { metersToKilometers } from "../../util/helpers";
 
 const Station = () => {
   const id = useParams().id;
@@ -78,11 +79,11 @@ const Station = () => {
     ],
     datasets: [
       {
-        label: "Distance",
+        label: "Distance (km)",
         backgroundColor: ["#CB2B3E", "#2A81CB"],
         data: [
-          Number(station.avgDepartureDistance),
-          Number(station.avgReturnDistance),
+          metersToKilometers(station.avgDepartureDistance),
+          metersToKilometers(station.avgReturnDistance),
         ],
       },
     ],
