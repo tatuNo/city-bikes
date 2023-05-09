@@ -50,6 +50,7 @@ const Stations = () => {
           setCircle={setCircle}
           controls={true}
           center={[60.192059, 24.945831]}
+          zoom={11}
         />
       </div>
       <Pagination

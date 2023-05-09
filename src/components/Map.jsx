@@ -33,7 +33,7 @@ const createCustomIcon = (color) => {
   });
 };
 
-const Map = ({ stations, setCircle, controls, center }) => {
+const Map = ({ stations, setCircle, controls, center, zoom }) => {
   const drawnCircleRef = useRef(null);
 
   const handleCreated = (e) => {
@@ -58,7 +58,7 @@ const Map = ({ stations, setCircle, controls, center }) => {
   return (
     <MapContainer
       center={center}
-      zoom={11}
+      zoom={zoom}
       scrollWheelZoom={false}
       className="h-96 w-full"
     >

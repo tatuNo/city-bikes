@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,7 +9,6 @@ import {
   ArcElement,
 } from "chart.js";
 import RadioGroup from "../../components/RadioGroup";
-import Checkbox from "../../components/Checkbox";
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
@@ -59,7 +57,6 @@ const options = [
 const Bars = ({
   departureData,
   returnData,
-  handleCheckboxChange,
   selectedOption,
   setSelectedOption,
 }) => {
@@ -72,16 +69,11 @@ const Bars = ({
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-between lg:flex-row">
-        <Checkbox label="Show on the map" onChange={handleCheckboxChange} />
-        <div className="mx-auto">
-          <RadioGroup
-            options={options}
-            selectedOption={selectedOption}
-            handleRadioChange={(e) => setSelectedOption(e.target.value)}
-          />
-        </div>
-      </div>
+      <RadioGroup
+        options={options}
+        selectedOption={selectedOption}
+        handleRadioChange={(e) => setSelectedOption(e.target.value)}
+      />
       <div className="h-96">{barsElement}</div>
     </div>
   );

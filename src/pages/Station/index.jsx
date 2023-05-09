@@ -13,9 +13,23 @@ const Station = () => {
 
   useEffect(() => {
     if (station) {
-      setStations([station]);
+      const stationsToAdd = (
+        selectedBarOption === "departures"
+          ? station.departures.map((d) => d.departureStation)
+          : station.returns.map((r) => r.returnStation)
+      ).map((s) => ({
+        ...s,
+        markerColor:
+          s.id === Number(id)
+            ? "black"
+            : selectedBarOption === "departures"
+            ? "red"
+            : "blue",
+      }));
+      const filteredStations = stationsToAdd.filter((s) => s.id !== Number(id));
+      setStations([station, ...filteredStations]);
     }
-  }, [station]);
+  }, [station, selectedBarOption]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -74,25 +88,6 @@ const Station = () => {
     ],
   };
 
-  const handleCheckboxChange = (checked) => {
-    if (!checked) {
-      setStations([station]);
-      return;
-    }
-
-    const stationsToAdd = (
-      selectedBarOption === "departures"
-        ? station.departures.map((d) => d.departureStation)
-        : station.returns.map((r) => r.returnStation)
-    ).map((s) => ({
-      ...s,
-      markerColor: selectedBarOption === "departures" ? "red" : "blue",
-    }));
-
-    const filteredStations = stationsToAdd.filter((s) => s.id !== station.id);
-    setStations([...stations, ...filteredStations]);
-  };
-
   return (
     <div className="flex flex-1 flex-col gap-10 p-6 text-center">
       <h1 className="text-2xl">
@@ -106,7 +101,6 @@ const Station = () => {
         <Bars
           departureData={departureData}
           returnData={returnData}
-          handleCheckboxChange={handleCheckboxChange}
           selectedOption={selectedBarOption}
           setSelectedOption={setSelectedBarOption}
         />
@@ -114,6 +108,7 @@ const Station = () => {
           <Map
             stations={stations}
             center={[station.yCoordinate, station.xCoordinate]}
+            zoom={13}
           />
         </div>
       </div>
