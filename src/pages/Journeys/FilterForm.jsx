@@ -1,6 +1,7 @@
 import { Form, Formik } from "formik";
 import TextField from "../../components/TextField";
 import * as Yup from "yup";
+import { minutesToSeconds, kilometersToMeters } from "../../util/helpers";
 
 const validationSchema = Yup.object().shape(
   {
@@ -50,11 +51,15 @@ const FilterForm = ({ setSearch }) => {
     }
 
     if (minDistance && maxDistance) {
-      search.distance = `${minDistance},${maxDistance}`;
+      search.distance = `${kilometersToMeters(
+        minDistance
+      )},${kilometersToMeters(maxDistance)}`;
     }
 
     if (minDuration && maxDuration) {
-      search.duration = `${minDuration},${maxDuration}`;
+      search.duration = `${minutesToSeconds(minDuration)},${minutesToSeconds(
+        maxDuration
+      )}`;
     }
 
     setSearch(search);
