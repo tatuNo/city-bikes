@@ -45,6 +45,7 @@ const Journeys = () => {
       <div>
         <Pagination
           itemCount={itemCount}
+          offset={offset}
           setOffset={setOffset}
           limit={limit}
           setLimit={setLimit}

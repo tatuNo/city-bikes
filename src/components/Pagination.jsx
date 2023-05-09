@@ -4,6 +4,7 @@ import RadioGroup from "./RadioGroup";
 
 const Pagination = ({
   itemCount,
+  offset,
   setOffset,
   limit,
   setLimit,
@@ -11,6 +12,8 @@ const Pagination = ({
 }) => {
   const itemsPerPage = Number(limit);
   const pageCount = Math.ceil(itemCount / itemsPerPage);
+  const first = offset + 1;
+  const last = Math.min(offset + itemsPerPage, itemCount);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % itemCount;
@@ -20,7 +23,9 @@ const Pagination = ({
   return (
     <div className="flex flex-col-reverse items-center gap-6 bg-seondary p-4 text-left lg:flex-row lg:justify-between">
       <div className="order-1 lg:order-1">
-        <p className="text-sm">Showing X to Y of {itemCount} results</p>
+        <p className="text-sm">
+          Showing {first} to {last} of {itemCount} results
+        </p>
       </div>
       <ReactPaginate
         containerClassName="order-3 lg:order-2 isolate inline-flex -space-x-px rounded-md shadow-sm"

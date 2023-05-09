@@ -56,6 +56,7 @@ const Stations = () => {
       <Pagination
         itemCount={itemCount}
         setOffset={setOffset}
+        offset={offset}
         limit={limit}
         setLimit={setLimit}
         limitOptions={limitOptions}
