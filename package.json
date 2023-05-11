@@ -10,7 +10,8 @@
     "dev-server": "NODE_ENV=development nodemon api/index.js",
     "build": "vite build",
     "preview": "vite preview",
-    "cypress-open": "cypress open"
+    "cypress-open": "cypress open",
+    "test-e2e": "cypress run"
   },
   "repository": {
     "type": "git",
