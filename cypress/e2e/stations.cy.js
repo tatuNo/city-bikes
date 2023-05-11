@@ -20,4 +20,20 @@ describe("Stations", function () {
       ).should("be.true");
     });
   });
+
+  it("redirects to station page on table element click", () => {
+    let initialUrl;
+    cy.url().then((url) => {
+      initialUrl = url;
+      cy.get("td")
+        .first()
+        .invoke("text")
+        .then((text) => {
+          cy.get("td").first().click();
+
+          cy.url().should("not.eq", initialUrl);
+          cy.contains(text);
+        });
+    });
+  });
 });
