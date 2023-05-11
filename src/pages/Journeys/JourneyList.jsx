@@ -54,7 +54,7 @@ const JourneyList = ({ journeys, isFetching, sort, setSort }) => {
             </th>
           </tr>
         </thead>
-        <tbody id="journeylist">
+        <tbody id="journeys">
           {journeys.map((journey) => (
             <Journey
               key={journey.id}

@@ -9,7 +9,7 @@ const StationList = ({ stations }) => (
           <th className="border-b text-center">Address</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="stations">
         {stations.map((station) => (
           <Station
             id={station.id}

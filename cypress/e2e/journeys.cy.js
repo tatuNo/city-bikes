@@ -27,7 +27,7 @@ describe("Journey filtering", function () {
 
     applyFilters();
 
-    cy.get("#journeylist > tr").each((row) => {
+    cy.get("#journeys > tr").each((row) => {
       const firstTdText = row.find("td").eq(0).text().toLowerCase();
       const secondTdText = row.find("td").eq(1).text().toLowerCase();
 
@@ -41,7 +41,7 @@ describe("Journey filtering", function () {
 
     applyFilters();
 
-    cy.get("#journeylist > tr > td:nth-child(3)").each((td) => {
+    cy.get("#journeys> tr > td:nth-child(3)").each((td) => {
       const text = td.text();
       cy.wrap(Number(text)).should("be.within", 15, 20);
     });
@@ -53,7 +53,7 @@ describe("Journey filtering", function () {
 
     applyFilters();
 
-    cy.get("#journeylist > tr > td:nth-child(4)").each((td) => {
+    cy.get("#journeys > tr > td:nth-child(4)").each((td) => {
       const text = td.text();
       cy.wrap(Number(text)).should("be.within", 15, 20);
     });
@@ -129,7 +129,7 @@ describe("Journeys sorting", function () {
 
     sortColumn("Distance (km)");
 
-    getColumnValues("#journeylist > tr > td:nth-child(3)").then((values) => {
+    getColumnValues("#journeys > tr > td:nth-child(3)").then((values) => {
       const sorted = _.sortBy(values);
       cy.wrap(values).should("deep.equal", sorted);
     });
@@ -139,7 +139,7 @@ describe("Journeys sorting", function () {
     sortColumn("Distance (km)");
     sortColumn("Distance (km)");
 
-    getColumnValues("#journeylist > tr > td:nth-child(3)").then((values) => {
+    getColumnValues("#journeys > tr > td:nth-child(3)").then((values) => {
       const sorted = _.sortBy(values).reverse();
 
       cy.wrap(values).should("deep.equal", sorted);
@@ -148,7 +148,7 @@ describe("Journeys sorting", function () {
 
   it("first click on duration sorts descending", function () {
     sortColumn("Duration (min)");
-    getColumnValues("#journeylist > tr > td:nth-child(4)").then((values) => {
+    getColumnValues("#journeys > tr > td:nth-child(4)").then((values) => {
       const sorted = _.sortBy(values);
 
       cy.wrap(values).should("deep.equal", sorted);
@@ -159,7 +159,7 @@ describe("Journeys sorting", function () {
     sortColumn("Duration (min)");
     sortColumn("Duration (min)");
 
-    getColumnValues("#journeylist > tr > td:nth-child(4)").then((values) => {
+    getColumnValues("#journeys > tr > td:nth-child(4)").then((values) => {
       const sorted = _.sortBy(values).reverse();
 
       cy.wrap(values).should("deep.equal", sorted);
