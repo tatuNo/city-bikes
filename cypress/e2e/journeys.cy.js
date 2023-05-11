@@ -1,17 +1,17 @@
+const { _ } = Cypress;
+
+const setInput = (filterName, value) => {
+  cy.get(`input[name="${filterName}"]`).type(value).should("have.value", value);
+};
+
+const applyFilters = () => {
+  cy.contains("Apply").click();
+};
+
 describe("Journey filtering", function () {
   beforeEach(function () {
     cy.visit("http://localhost:5173");
   });
-
-  const setInput = (filterName, value) => {
-    cy.get(`input[name="${filterName}"]`)
-      .type(value)
-      .should("have.value", value);
-  };
-
-  const applyFilters = () => {
-    cy.contains("Apply").click();
-  };
 
   const checkInputValue = (filterName, expectedValue) => {
     cy.get(`input[name="${filterName}"]`).should("have.value", expectedValue);
@@ -102,5 +102,67 @@ describe("Journey filtering", function () {
     checkInputValue("minDuration", expectedValue);
     checkInputValue("maxDuration", expectedValue);
     checkInputValue("station", expectedValue);
+  });
+});
+
+describe("Journeys sorting", function () {
+  beforeEach(function () {
+    cy.visit("http://localhost:5173");
+  });
+
+  const toStrings = (cells) => _.map(cells, "textContent");
+  const toNumbers = (cells) => _.map(cells, Number);
+
+  const sortColumn = (column) => {
+    cy.contains(column).click();
+  };
+
+  const getColumnValues = (elements) => {
+    return cy.get(elements).then(toStrings).then(toNumbers);
+  };
+
+  it("first click on distance sorts descending", function () {
+    // apply some filters to have vary in distance
+    setInput("minDistance", 20);
+    setInput("maxDistance", 21);
+    applyFilters();
+
+    sortColumn("Distance (km)");
+
+    getColumnValues("#journeylist > tr > td:nth-child(3)").then((values) => {
+      const sorted = _.sortBy(values);
+      cy.wrap(values).should("deep.equal", sorted);
+    });
+  });
+
+  it("two clicks on distance sorts ascending", function () {
+    sortColumn("Distance (km)");
+    sortColumn("Distance (km)");
+
+    getColumnValues("#journeylist > tr > td:nth-child(3)").then((values) => {
+      const sorted = _.sortBy(values).reverse();
+
+      cy.wrap(values).should("deep.equal", sorted);
+    });
+  });
+
+  it("first click on duration sorts descending", function () {
+    sortColumn("Duration (min)");
+    getColumnValues("#journeylist > tr > td:nth-child(4)").then((values) => {
+      const sorted = _.sortBy(values);
+
+      cy.wrap(values).should("deep.equal", sorted);
+    });
+  });
+
+  it("two clicks on duration sorts ascending", function () {
+    sortColumn("Duration (min)");
+    sortColumn("Duration (min)");
+
+    getColumnValues("#journeylist > tr > td:nth-child(4)").then((values) => {
+      const sorted = _.sortBy(values).reverse();
+
+      cy.wrap(values).should("deep.equal", sorted);
+    });
   });
 });
