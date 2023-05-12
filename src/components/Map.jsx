@@ -57,6 +57,7 @@ const Map = ({ stations, setCircle, controls, center, zoom }) => {
 
   return (
     <MapContainer
+      id="map"
       center={center}
       zoom={zoom}
       scrollWheelZoom={false}
