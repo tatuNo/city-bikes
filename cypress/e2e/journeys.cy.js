@@ -8,14 +8,14 @@ const applyFilters = () => {
   cy.contains("Apply").click();
 };
 
+const checkInputValue = (filterName, expectedValue) => {
+  cy.get(`input[name="${filterName}"]`).should("have.value", expectedValue);
+};
+
 describe("Journey filtering", function () {
   beforeEach(function () {
     cy.visit("http://localhost:5173");
   });
-
-  const checkInputValue = (filterName, expectedValue) => {
-    cy.get(`input[name="${filterName}"]`).should("have.value", expectedValue);
-  };
 
   it("journeys page can be opened", function () {
     cy.contains("Filters");
@@ -23,7 +23,7 @@ describe("Journey filtering", function () {
 
   it("journeys can be filtered by station name", function () {
     const keyword = "uimastadion";
-    setInput("station", keyword);
+    cy.setInput("station", keyword);
 
     applyFilters();
 
@@ -36,8 +36,8 @@ describe("Journey filtering", function () {
   });
 
   it("journeys can be filtered by distance", function () {
-    setInput("minDistance", "15");
-    setInput("maxDistance", "20");
+    cy.setInput("minDistance", "15");
+    cy.setInput("maxDistance", "20");
 
     applyFilters();
 
@@ -48,8 +48,8 @@ describe("Journey filtering", function () {
   });
 
   it("journeys can be filtered by duration", function () {
-    setInput("minDuration", "15");
-    setInput("maxDuration", "20");
+    cy.setInput("minDuration", "15");
+    cy.setInput("maxDuration", "20");
 
     applyFilters();
 
@@ -60,39 +60,39 @@ describe("Journey filtering", function () {
   });
 
   it("max distance is required if min distance is set", function () {
-    setInput("minDistance", "15");
+    cy.setInput("minDistance", "15");
 
     applyFilters();
     cy.contains("Max distance required");
   });
 
   it("min distance is required if max distance is set", function () {
-    setInput("maxDistance", "15");
+    cy.setInput("maxDistance", "15");
 
     applyFilters();
     cy.contains("Min distance required");
   });
 
   it("max duration is required if min duration is set", function () {
-    setInput("minDuration", "15");
+    cy.setInput("minDuration", "15");
 
     applyFilters();
     cy.contains("Max duration required");
   });
 
   it("min duration is required if max duration is set", function () {
-    setInput("maxDuration", "15");
+    cy.setInput("maxDuration", "15");
 
     applyFilters();
     cy.contains("Min duration required");
   });
 
   it("reset filters cleans the form", function () {
-    setInput("minDistance", "15");
-    setInput("maxDistance", "20");
-    setInput("minDuration", "15");
-    setInput("maxDuration", "20");
-    setInput("station", "uimastadion");
+    cy.setInput("minDistance", "15");
+    cy.setInput("maxDistance", "20");
+    cy.setInput("minDuration", "15");
+    cy.setInput("maxDuration", "20");
+    cy.setInput("station", "uimastadion");
 
     cy.contains("Reset filters").click();
 
@@ -110,7 +110,6 @@ describe("Journeys sorting", function () {
     cy.visit("http://localhost:5173");
   });
 
-  const toStrings = (cells) => _.map(cells, "textContent");
   const toNumbers = (cells) => _.map(cells, Number);
 
   const sortColumn = (column) => {
@@ -118,13 +117,13 @@ describe("Journeys sorting", function () {
   };
 
   const getColumnValues = (elements) => {
-    return cy.get(elements).then(toStrings).then(toNumbers);
+    return cy.get(elements).then(cy.toStrings).then(toNumbers);
   };
 
   it("first click on distance sorts descending", function () {
     // apply some filters to have vary in distance
-    setInput("minDistance", 20);
-    setInput("maxDistance", 21);
+    cy.setInput("minDistance", 20);
+    cy.setInput("maxDistance", 21);
     applyFilters();
 
     sortColumn("Distance (km)");

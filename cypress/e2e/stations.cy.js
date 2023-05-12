@@ -1,13 +1,18 @@
 const { _ } = Cypress;
 
-const toStrings = (cells) => _.map(cells, "textContent");
+const drawCircle = () => {
+  cy.get(".leaflet-draw-draw-circle").first().click();
 
-const getColumnValues = (elements) => {
-  return cy.get(elements).then(toStrings);
+  cy.get("#map")
+    .realMouseDown({ position: "center" })
+    .realMouseMove(50, 50, { position: "center" })
+    .realMouseUp();
+
+  cy.wait("@getStations");
 };
 
-const setInput = (filterName, value) => {
-  cy.get(`input[name="${filterName}"]`).type(value).should("have.value", value);
+const getColumnValues = (elements) => {
+  return cy.get(elements).then(cy.toStrings);
 };
 
 describe("Stations", function () {
@@ -19,7 +24,7 @@ describe("Stations", function () {
 
   it("can be filtered", function () {
     const keyword = "kam";
-    setInput("search", keyword);
+    cy.setInput("search", keyword);
 
     cy.wait("@getStations");
 
@@ -60,14 +65,7 @@ describe("Stations", function () {
     // get original table values, draw circle and compare original values to new values
     getColumnValues("#stations > tr > td:nth-child(1)").then((names) => {
       getColumnValues("#stations > tr > td:nth-child(2)").then((addresses) => {
-        cy.get(".leaflet-draw-draw-circle").first().click();
-
-        cy.get("#map")
-          .realMouseDown({ position: "center" })
-          .realMouseMove(50, 50, { position: "center" })
-          .realMouseUp();
-
-        cy.wait("@getStations");
+        drawCircle();
 
         getColumnValues("#stations > tr > td:nth-child(1)").then(
           (namesAfter) => {
@@ -86,14 +84,7 @@ describe("Stations", function () {
   it("clearing circle should set table to initial state", function () {
     getColumnValues("#stations > tr > td:nth-child(1)").then((names) => {
       getColumnValues("#stations > tr > td:nth-child(2)").then((addresses) => {
-        cy.get(".leaflet-draw-draw-circle").first().click();
-
-        cy.get("#map")
-          .realMouseDown({ position: "center" })
-          .realMouseMove(50, 50, { position: "center" })
-          .realMouseUp();
-
-        cy.wait("@getStations");
+        drawCircle();
 
         cy.get(".leaflet-draw-edit-remove").click();
 

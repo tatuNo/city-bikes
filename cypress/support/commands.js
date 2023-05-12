@@ -23,3 +23,10 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+const { _ } = Cypress;
+
+Cypress.Commands.add("setInput", (filterName, value) => {
+  cy.get(`input[name="${filterName}"]`).type(value).should("have.value", value);
+});
+
+Cypress.Commands.add("toStrings", (cells) => _.map(cells, "textContent"));
