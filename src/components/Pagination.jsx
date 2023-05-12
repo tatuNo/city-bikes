@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ReactPaginate from "react-paginate";
 import RadioGroup from "./RadioGroup";
 
@@ -14,9 +13,18 @@ const Pagination = ({
   const pageCount = Math.ceil(itemCount / itemsPerPage);
   const first = offset + 1;
   const last = Math.min(offset + itemsPerPage, itemCount);
+  const currentPage = Math.floor(offset / itemsPerPage);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % itemCount;
+    setOffset(newOffset);
+  };
+
+  const handleLimitChange = (e) => {
+    const newLimit = e.target.value;
+    const newOffset = Math.floor(offset / newLimit) * newLimit;
+
+    setLimit(newLimit);
     setOffset(newOffset);
   };
 
@@ -41,13 +49,14 @@ const Pagination = ({
         pageCount={pageCount}
         previousLabel="<"
         renderOnZeroPageCount={null}
+        forcePage={currentPage}
       />
       <div className="order-2 flex items-center lg:order-3">
         <span>Per page</span>
         <RadioGroup
           options={limitOptions}
           selectedOption={limit}
-          handleRadioChange={(e) => setLimit(e.target.value)}
+          handleRadioChange={(e) => handleLimitChange(e)}
         />
       </div>
     </div>

@@ -29,6 +29,11 @@ const Stations = () => {
     return <div>Loading...</div>;
   }
 
+  const handleSearchChange = (value) => {
+    setSearchQuery(value);
+    setOffset(0);
+  };
+
   const itemCount = stations.count;
 
   return (
@@ -41,7 +46,7 @@ const Stations = () => {
             defaultValue={null}
             type="search"
             placeholder="Search"
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => handleSearchChange(e.target.value)}
           />
         </div>
         <StationList stations={stations.rows} />

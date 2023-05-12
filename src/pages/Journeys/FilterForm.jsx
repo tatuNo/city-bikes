@@ -36,7 +36,7 @@ const initialValues = {
   minDuration: "",
 };
 
-const FilterForm = ({ setSearch }) => {
+const FilterForm = ({ setSearch, setOffset }) => {
   const onSubmit = ({
     station,
     maxDistance,
@@ -63,6 +63,7 @@ const FilterForm = ({ setSearch }) => {
     }
 
     setSearch(search);
+    setOffset(0);
   };
 
   const onReset = () => setSearch({});
