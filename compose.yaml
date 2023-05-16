@@ -1,4 +1,31 @@
 services:
+  client:
+    build:
+      context: .
+      dockerfile: front.Dockerfile
+    container_name: citybikes-front
+  api:
+    build:
+      context: .
+      dockerfile: back.Dockerfile
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db/citybikes
+    depends_on:
+      - db
+    restart: on-failure
+    container_name: citybikes-back
+  nginx:
+    image: nginx:1.20.1
+    environment:
+      - NGINX_PORT=81
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:81
+    container_name: reverse-proxy
+    depends_on:
+      - citybikes-front
+      - citybikes-back
   db:
     image: postgis/postgis
     restart: unless-stopped
@@ -6,18 +33,14 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=citybikes
-    ports:
-      - "5432:5432"
     volumes:
       - ./api/database:/var/lib/postgresql/data
-    container_name: database
-  test-db:
+    container_name: db
+  db-test:
     image: postgis/postgis
     restart: unless-stopped
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=citybikes
-    ports:
-      - "5433:5432"
-    container_name: database-test
+    container_name: db-test

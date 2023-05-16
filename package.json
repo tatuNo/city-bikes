@@ -11,7 +11,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "cypress-open": "cypress open",
-    "test-e2e": "cypress run"
+    "test-e2e": "cypress run",
+    "start": "node api/index.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.14",
+    "cypress": "^12.12.0",
+    "cypress-real-events": "^1.8.1",
     "eslint": "^8.36.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-node": "^4.1.0",
@@ -50,8 +53,6 @@
   "dependencies": {
     "axios": "^1.3.4",
     "chart.js": "^4.2.1",
-    "cypress": "^12.12.0",
-    "cypress-real-events": "^1.7.6",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
