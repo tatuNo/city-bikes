@@ -1,17 +1,19 @@
-const fs = require("fs");
-const path = require("path");
 const csv = require("fast-csv");
-const fg = require("fast-glob");
+const axios = require("axios");
 
 const { connectToDatabase } = require("./utils/db");
 const { Station } = require("./models");
 
 const BATCH_SIZE = 1000;
 
-const processStationFile = (filePath) => {
+const processStationFile = async (url) => {
+  const { data } = await axios.get(url, {
+    responseType: "stream",
+  });
+
   let validData = [];
-  const stream = fs
-    .createReadStream(filePath)
+
+  const stream = data
     .pipe(
       csv.parse({
         headers: (headers) => headers.map((h) => h?.toLowerCase()),
@@ -42,7 +44,7 @@ const processStationFile = (filePath) => {
     .on("end", () => {
       Station.bulkCreate(validData).then(() => {
         validData = [];
-        console.log(`Finished ${filePath}`);
+        console.log(`Finished ${url}`);
       });
     });
 };
@@ -50,13 +52,10 @@ const processStationFile = (filePath) => {
 const start = async () => {
   await connectToDatabase();
 
-  const stationFiles = await fg(
-    path.resolve(__dirname, "data/stations/", "*.csv")
-  );
+  const url =
+    "https://opendata.arcgis.com/datasets/726277c507ef4914b0aec3cbcfcbfafc_0.csv";
 
-  for (const stationFile of stationFiles) {
-    processStationFile(stationFile);
-  }
+  processStationFile(url);
 };
 
 start();

@@ -1,7 +1,5 @@
-const fs = require("fs");
-const path = require("path");
 const csv = require("fast-csv");
-const fg = require("fast-glob");
+const axios = require("axios");
 
 const { validateLine } = require("./utils/validation");
 const { connectToDatabase } = require("./utils/db");
@@ -9,10 +7,14 @@ const { Journey } = require("./models");
 
 const BATCH_SIZE = 1000;
 
-const processJourneyFile = (filePath) => {
+const processJourneyFile = async (url) => {
+  const { data } = await axios.get(url, {
+    responseType: "stream",
+  });
+
   let validData = [];
-  const stream = fs
-    .createReadStream(filePath)
+
+  const stream = data
     .pipe(
       csv.parse({
         renameHeaders: true,
@@ -55,7 +57,7 @@ const processJourneyFile = (filePath) => {
     .on("end", () => {
       Journey.bulkCreate(validData).then(() => {
         validData = [];
-        console.log(`Finished ${filePath}`);
+        console.log(`Finished ${url}`);
       });
     });
 };
@@ -63,14 +65,15 @@ const processJourneyFile = (filePath) => {
 const start = async () => {
   await connectToDatabase();
 
-  const journeyFiles = await fg(
-    path.resolve(__dirname, "data/journeys", "*.csv")
-  );
+  const urls = [
+    "https://dev.hsl.fi/citybikes/od-trips-2021/2021-05.csv",
+    "https://dev.hsl.fi/citybikes/od-trips-2021/2021-06.csv",
+    "https://dev.hsl.fi/citybikes/od-trips-2021/2021-07.csv",
+  ];
 
-  for (const journeyFile of journeyFiles) {
-    processJourneyFile(journeyFile);
+  for (const url of urls) {
+    processJourneyFile(url);
   }
-
 };
 
 start();
