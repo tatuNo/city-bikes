@@ -43,11 +43,3 @@ services:
       timeout: 15s
       retries: 5
     container_name: db
-  db-test:
-    image: postgis/postgis
-    restart: unless-stopped
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=citybikes
-    container_name: db-test

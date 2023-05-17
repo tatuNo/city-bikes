@@ -1,0 +1,23 @@
+services:
+  db-dev:
+    image: postgis/postgis
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=citybikes
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./api/database-dev:/var/lib/postgresql/data
+    container_name: database-dev
+  test-db-dev:
+    image: postgis/postgis
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=citybikes
+    ports:
+      - "5433:5432"
+    container_name: database-test

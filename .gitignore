@@ -1,5 +1,6 @@
 node_modules
 api/database
+api/database-dev
 .env
 
 # Logs
