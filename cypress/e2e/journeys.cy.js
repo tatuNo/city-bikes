@@ -1,16 +1,12 @@
+/* eslint-disable prefer-arrow-callback */
 const { _ } = Cypress;
-
-const setInput = (filterName, value) => {
-  cy.get(`input[name="${filterName}"]`).type(value).should("have.value", value);
-};
 
 const applyFilters = () => {
   cy.contains("Apply").click();
 };
 
-const checkInputValue = (filterName, expectedValue) => {
+const checkInputValue = (filterName, expectedValue) =>
   cy.get(`input[name="${filterName}"]`).should("have.value", expectedValue);
-};
 
 describe("Journey filtering", function () {
   beforeEach(function () {
@@ -116,9 +112,8 @@ describe("Journeys sorting", function () {
     cy.contains(column).click();
   };
 
-  const getColumnValues = (elements) => {
-    return cy.get(elements).then(cy.toStrings).then(toNumbers);
-  };
+  const getColumnValues = (elements) =>
+    cy.get(elements).then(cy.toStrings).then(toNumbers);
 
   it("first click on distance sorts descending", function () {
     // apply some filters to have vary in distance

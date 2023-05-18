@@ -9001,7 +9001,7 @@ const initialJourneys = [
   },
 ];
 
-initialStations = [
+const initialStations = [
   {
     id: 1,
     name: "odio",

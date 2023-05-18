@@ -1,4 +1,4 @@
-const { _ } = Cypress;
+/* eslint-disable prefer-arrow-callback */
 
 const drawCircle = () => {
   cy.get(".leaflet-draw-draw-circle").first().click();
@@ -11,9 +11,7 @@ const drawCircle = () => {
   cy.wait("@getStations");
 };
 
-const getColumnValues = (elements) => {
-  return cy.get(elements).then(cy.toStrings);
-};
+const getColumnValues = (elements) => cy.get(elements).then(cy.toStrings);
 
 describe("Stations", function () {
   beforeEach(function () {

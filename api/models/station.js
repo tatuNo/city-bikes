@@ -22,7 +22,8 @@ Station.init(
     yCoordinate: {
       type: DataTypes.DOUBLE,
     },
-  },  {
+  },
+  {
     sequelize,
     underscored: true,
     modelName: "station",

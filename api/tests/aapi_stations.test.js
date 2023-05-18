@@ -41,10 +41,10 @@ describe("GET /stations", () => {
     const res = await api.get(`/api/stations?search=${target}`).expect(200);
 
     const stations = res.body.rows;
-    for (const station of stations) {
+    stations.forEach((station) => {
       const nameContainsTarget = station.name.includes(target);
       const addressContainsTarget = station.address.includes(target);
       expect(nameContainsTarget || addressContainsTarget).toBeTruthy();
-    }
+    });
   });
 });

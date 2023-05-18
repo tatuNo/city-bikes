@@ -1,6 +1,6 @@
 {
   "extends": ["airbnb", "prettier"],
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "react", "jest", "cypress"],
   "rules": {
     "prettier/prettier": "error",
     "no-unused-vars": "warn",
@@ -9,13 +9,14 @@
     "no-process-exit": "off",
     "object-shorthand": "off",
     "class-methods-use-this": "off",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}],
+    "import/no-extraneous-dependencies": "off",
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": "off",
     "react/prop-types": "off",
-    "react/jsx-props-no-spreading": "off",
+    "react/jsx-props-no-spreading": "off"
   },
   "env": {
-    "jest": true
+    "jest/globals": true,
+    "cypress/globals": true
   }
 }

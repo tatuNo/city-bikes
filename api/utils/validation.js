@@ -21,7 +21,10 @@ const validateLine = (line) => {
     return false;
   }
 
-  if(stationBlackList.includes(departureStationId) || stationBlackList.includes(returnStationId)) {
+  if (
+    stationBlackList.includes(departureStationId) ||
+    stationBlackList.includes(returnStationId)
+  ) {
     return false;
   }
 

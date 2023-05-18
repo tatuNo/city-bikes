@@ -30,18 +30,18 @@ const processJourneyFile = async (url) => {
         ],
       })
     )
-    .transform((data) => ({
-      departureDate: new Date(data.departureDate),
-      returnDate: new Date(data.returnDate),
-      departureStationId: Number(data.departureStationId),
-      returnStationId: Number(data.returnStationId),
-      distance: Number(data.distance),
-      duration: Number(data.duration),
+    .transform((item) => ({
+      departureDate: new Date(item.departureDate),
+      returnDate: new Date(item.returnDate),
+      departureStationId: Number(item.departureStationId),
+      returnStationId: Number(item.returnStationId),
+      distance: Number(item.distance),
+      duration: Number(item.duration),
     }))
-    .validate((data) => validateLine(data))
+    .validate((line) => validateLine(line))
     .on("error", (error) => console.log(error))
-    .on("data", (data) => {
-      validData.push(data);
+    .on("data", (valid) => {
+      validData.push(valid);
       if (validData.length > BATCH_SIZE) {
         stream.pause();
         Journey.bulkCreate(validData)
@@ -71,9 +71,9 @@ const start = async () => {
     "https://dev.hsl.fi/citybikes/od-trips-2021/2021-07.csv",
   ];
 
-  for (const url of urls) {
+  urls.forEach((url) => {
     processJourneyFile(url);
-  }
+  });
 };
 
 start();

@@ -16,19 +16,19 @@ const processStationFile = async (url) => {
   const stream = data
     .pipe(
       csv.parse({
-        headers: (headers) => headers.map((h) => h?.toLowerCase()),
+        headers: (headers) => headers.map((h) => h.toLowerCase()),
       })
     )
-    .transform((data) => ({
-      id: Number(data.id),
-      name: data.nimi,
-      address: data.osoite,
-      xCoordinate: data.x,
-      yCoordinate: data.y,
+    .transform((item) => ({
+      id: Number(item.id),
+      name: item.nimi,
+      address: item.osoite,
+      xCoordinate: item.x,
+      yCoordinate: item.y,
     }))
     .on("error", (error) => console.log(error))
-    .on("data", (data) => {
-      validData.push(data);
+    .on("data", (valid) => {
+      validData.push(valid);
       if (validData.length > BATCH_SIZE) {
         stream.pause();
         Station.bulkCreate(validData)

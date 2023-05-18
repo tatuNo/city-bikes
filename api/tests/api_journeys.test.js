@@ -75,7 +75,7 @@ describe("GET /journeys", () => {
 
     const journeys = res.body.rows;
 
-    for (const journey of journeys) {
+    journeys.forEach((journey) => {
       const departureNameContainsTarget =
         journey.departureStation.name.includes(target);
       const returnNameContainsTarget =
@@ -84,6 +84,6 @@ describe("GET /journeys", () => {
       expect(
         departureNameContainsTarget || returnNameContainsTarget
       ).toBeTruthy();
-    }
+    });
   });
 });
