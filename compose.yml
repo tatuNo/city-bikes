@@ -1,33 +1,16 @@
 services:
-  client:
+  app:
     build:
       context: .
-      dockerfile: front.Dockerfile
-    container_name: citybikes-front
-  api:
-    build:
-      context: .
-      dockerfile: back.Dockerfile
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@db/citybikes
     depends_on:
       db:
         condition: service_healthy
-    restart: always
-    container_name: citybikes-back
-  nginx:
-    image: nginx:1.20.1
-    environment:
-      - NGINX_PORT=81
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
-      - 8080:81
-    container_name: reverse-proxy
-    depends_on:
-      - citybikes-front
-      - citybikes-back
+      - "3001:3001"
     restart: always
+    container_name: citybikes-app
   db:
     image: postgis/postgis
     restart: unless-stopped

@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "cypress-open": "cypress open",
     "test-e2e": "cypress run",
-    "start": "node api/index.js",
+    "start": "NODE_ENV=production node api/index.js",
     "start-init": "sh ./init-and-start-db.sh"
   },
   "repository": {

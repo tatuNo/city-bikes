@@ -9,6 +9,10 @@ const stationRouter = require("./controllers/stations");
 
 app.use(express.json());
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("dist"));
+}
+
 app.use("/api/journeys", journeysRouter);
 app.use("/api/stations", stationRouter);
 
