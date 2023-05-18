@@ -1,4 +1,5 @@
 const express = require("express");
+const history = require("connect-history-api-fallback");
 require("express-async-errors");
 const app = express();
 
@@ -10,6 +11,7 @@ const stationRouter = require("./controllers/stations");
 app.use(express.json());
 
 if (process.env.NODE_ENV === "production") {
+  app.use(history());
   app.use(express.static("dist"));
 }
 
