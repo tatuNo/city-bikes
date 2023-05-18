@@ -1,6 +1,7 @@
 const express = require("express");
 const history = require("connect-history-api-fallback");
 require("express-async-errors");
+
 const app = express();
 
 const { connectToDatabase } = require("./utils/db");
@@ -18,7 +19,6 @@ if (process.env.NODE_ENV === "production") {
 app.use("/api/journeys", journeysRouter);
 app.use("/api/stations", stationRouter);
 
-app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 
 const start = async () => {
