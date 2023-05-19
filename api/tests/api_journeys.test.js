@@ -66,6 +66,28 @@ describe("GET /journeys", () => {
     }
   });
 
+  test("should return journeys in descending order based on duration", async () => {
+    const res = await api.get("/api/journeys?sort=-duration").expect(200);
+
+    const journeys = res.body.rows;
+    for (let i = 0; i < journeys.length - 1; i += 1) {
+      expect(journeys[i].duration).toBeGreaterThanOrEqual(
+        journeys[i + 1].duration
+      );
+    }
+  });
+
+  test("should return journeys in ascending order based on duration", async () => {
+    const res = await api.get("/api/journeys?sort=duration").expect(200);
+
+    const journeys = res.body.rows;
+    for (let i = 0; i < journeys.length - 1; i += 1) {
+      expect(journeys[i].duration).toBeLessThanOrEqual(
+        journeys[i + 1].duration
+      );
+    }
+  });
+
   test("should return journeys filtered by distance", async () => {
     const res = await api.get("/api/journeys?distance=1,5").expect(200);
 
