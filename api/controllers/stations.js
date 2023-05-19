@@ -53,6 +53,10 @@ router.get("/:id", async (req, res) => {
     raw: true,
   });
 
+  if (!station) {
+    res.status(404).send({ error: "Station not found" });
+  }
+
   const departureCount = await Journey.count({
     where: { departureStationId: req.params.id },
   });
