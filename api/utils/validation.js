@@ -3,6 +3,8 @@ const stationBlackList = [997, 754, 999];
 /* eslint-disable no-restricted-globals */
 const isValidDate = (date) => date instanceof Date && !isNaN(date);
 
+const validateDates = (start, end) => start.getTime() < end.getTime();
+
 const validateLine = (line) => {
   const {
     departureDate,
@@ -14,6 +16,10 @@ const validateLine = (line) => {
   } = line;
 
   if (!isValidDate(departureDate) || !isValidDate(returnDate)) {
+    return false;
+  }
+
+  if (!validateDates(departureDate, returnDate)) {
     return false;
   }
 

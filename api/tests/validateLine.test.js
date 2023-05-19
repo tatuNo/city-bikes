@@ -108,4 +108,16 @@ describe("validateLine", () => {
     };
     expect(validateLine(lineObject)).toBe(false);
   });
+
+  test("should return false when departure date is before return date", () => {
+    const lineObject = {
+      departureDate: new Date("2021-05-31T23:55:38"),
+      returnDate: new Date("2021-05-31T23:49:59"),
+      departureStationId: 1,
+      returnStationId: 2,
+      distance: 100,
+      duration: 100,
+    };
+    expect(validateLine(lineObject)).toBe(false);
+  });
 });
