@@ -31,9 +31,12 @@ describe("GET /stations", () => {
   });
 
   test("should return the second page of stations with a limit of 5 offset 5", async () => {
-    const res = await api.get("/api/stations?limit=5&offset=5").expect(200);
-    expect(res.body.rows.length).toBeGreaterThanOrEqual(0);
-    expect(res.body.rows.length).toBeLessThanOrEqual(5);
+    const res1 = await api.get("/api/stations?limit=10").expect(200);
+    const res2 = await api.get("/api/stations?limit=5&offset=5").expect(200);
+
+    const expected = res1.body.rows.slice(5, 10);
+
+    expect(expected).toMatchObject(res2.body.rows);
   });
 
   test("should return stations whose name or address matches search parameter", async () => {

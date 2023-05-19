@@ -31,9 +31,12 @@ describe("GET /journeys", () => {
   });
 
   test("should return the second page of journeys with a limit of 5 offset 5", async () => {
-    const res = await api.get("/api/journeys?limit=5&offset=5").expect(200);
-    expect(res.body.rows.length).toBeGreaterThanOrEqual(0);
-    expect(res.body.rows.length).toBeLessThanOrEqual(5);
+    const res1 = await api.get("/api/journeys?limit=10").expect(200);
+    const res2 = await api.get("/api/journeys?limit=5&offset=5").expect(200);
+
+    const expected = res1.body.rows.slice(5, 10);
+
+    expect(expected).toMatchObject(res2.body.rows);
   });
 
   test("should return all journeys when limit is greater than number of journeys", async () => {
@@ -46,7 +49,9 @@ describe("GET /journeys", () => {
 
     const journeys = res.body.rows;
     for (let i = 0; i < journeys.length - 1; i += 1) {
-      expect(journeys[i].distance >= journeys[i + 1].distance).toBeTruthy();
+      expect(journeys[i].distance).toBeGreaterThanOrEqual(
+        journeys[i + 1].distance
+      );
     }
   });
 
@@ -55,7 +60,9 @@ describe("GET /journeys", () => {
 
     const journeys = res.body.rows;
     for (let i = 0; i < journeys.length - 1; i += 1) {
-      expect(journeys[i].distance <= journeys[i + 1].distance).toBeTruthy();
+      expect(journeys[i].distance).toBeLessThanOrEqual(
+        journeys[i + 1].distance
+      );
     }
   });
 
