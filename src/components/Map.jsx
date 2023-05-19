@@ -21,8 +21,8 @@ const drawOptions = {
   circlemarker: false,
 };
 
-const createCustomIcon = (color) => {
-  return icon({
+const createCustomIcon = (color) =>
+  icon({
     iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color}.png`,
     shadowUrl:
       "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
@@ -31,13 +31,12 @@ const createCustomIcon = (color) => {
     popupAnchor: [1, -34],
     shadowSize: [41, 41],
   });
-};
 
 const Map = ({ stations, setCircle, controls, center, zoom }) => {
   const drawnCircleRef = useRef(null);
 
   const handleCreated = (e) => {
-    const layerType = e.layerType;
+    const { layerType } = e;
     if (layerType === "circle") {
       const circleLayer = e.layer;
 

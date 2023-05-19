@@ -6,8 +6,14 @@ import Doughnuts from "./Doughnuts";
 import Bars from "./Bars";
 import { metersToKilometers } from "../../util/helpers";
 
+const markerColors = {
+  default: "black",
+  departures: "red",
+  returns: "blue",
+};
+
 const Station = () => {
-  const id = useParams().id;
+  const { id } = useParams();
   const { isLoading, station } = useStation(id);
   const [selectedBarOption, setSelectedBarOption] = useState("departures");
   const [stations, setStations] = useState([]);
@@ -21,11 +27,7 @@ const Station = () => {
       ).map((s) => ({
         ...s,
         markerColor:
-          s.id === Number(id)
-            ? "black"
-            : selectedBarOption === "departures"
-            ? "red"
-            : "blue",
+          markerColors[s.id === Number(id) ? "default" : selectedBarOption],
       }));
       const filteredStations = stationsToAdd.filter((s) => s.id !== Number(id));
       setStations([station, ...filteredStations]);
@@ -36,8 +38,7 @@ const Station = () => {
     return <div>Loading...</div>;
   }
 
-  const departures = station.departures;
-  const returns = station.returns;
+  const { departures, returns } = station;
 
   const departureData = {
     labels: departures.map((departure) => departure.departureStation.name),

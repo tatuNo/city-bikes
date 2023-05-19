@@ -14,7 +14,7 @@
     "test-e2e": "cypress run",
     "start": "NODE_ENV=production node api/index.js",
     "start-init": "sh ./init-and-start-db.sh",
-    "lint": "eslint ."
+    "lint": "eslint --ext .js,.jsx ."
   },
   "repository": {
     "type": "git",

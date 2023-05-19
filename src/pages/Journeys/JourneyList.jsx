@@ -1,10 +1,9 @@
-import Journey from "./Journey";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
+import Journey from "./Journey";
 
 const JourneyList = ({ journeys, isFetching, sort, setSort }) => {
-  const handleSort = (key) => {
-    return sort === key ? setSort(`-${key}`) : setSort(key);
-  };
+  const handleSort = (key) =>
+    sort === key ? setSort(`-${key}`) : setSort(key);
 
   const getSortIcon = (key) => {
     const field = sort?.startsWith("-") ? sort.slice(1) : sort;

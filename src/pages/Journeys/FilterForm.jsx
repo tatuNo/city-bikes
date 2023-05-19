@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
-import TextField from "../../components/TextField";
 import * as Yup from "yup";
+import TextField from "../../components/TextField";
 import { minutesToSeconds, kilometersToMeters } from "../../util/helpers";
 
 const validationSchema = Yup.object().shape(

@@ -9,8 +9,8 @@ import {
   Legend,
   ArcElement,
 } from "chart.js";
-import RadioGroup from "../../components/RadioGroup";
 import { Doughnut } from "react-chartjs-2";
+import RadioGroup from "../../components/RadioGroup";
 
 ChartJS.register(
   CategoryScale,
@@ -58,12 +58,12 @@ const options = [
 const Doughnuts = ({ journeyCountData, distanceData }) => {
   const [selectedOption, setSelectedOption] = useState("count");
 
-  const doughnutElement =
-    selectedOption === "count" ? (
+  const doughnutElements = {
+    count: (
       <Doughnut options={journeyCountDoughnutOptions} data={journeyCountData} />
-    ) : selectedOption === "avg" ? (
-      <Doughnut options={distanceDoughnutOptions} data={distanceData} />
-    ) : null;
+    ),
+    avg: <Doughnut options={distanceDoughnutOptions} data={distanceData} />,
+  };
 
   return (
     <div>
@@ -72,7 +72,7 @@ const Doughnuts = ({ journeyCountData, distanceData }) => {
         selectedOption={selectedOption}
         handleRadioChange={(e) => setSelectedOption(e.target.value)}
       />
-      <div className="h-96">{doughnutElement}</div>
+      <div className="h-96">{doughnutElements[selectedOption]}</div>
     </div>
   );
 };

@@ -2,10 +2,8 @@ import { useQuery } from "react-query";
 import stationService from "../services/stations";
 
 const useStation = (id) => {
-  const { data, isLoading } = useQuery(
-    ["station", id],
-    () => stationService.getOne(id)
-    // { keepPreviousData: true }
+  const { data, isLoading } = useQuery(["station", id], () =>
+    stationService.getOne(id)
   );
 
   return {

@@ -53,7 +53,7 @@ const Stations = () => {
         <Map
           stations={stations.rows}
           setCircle={setCircle}
-          controls={true}
+          controls
           center={[60.192059, 24.945831]}
           zoom={11}
         />

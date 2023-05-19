@@ -8,8 +8,8 @@ import {
   Legend,
   ArcElement,
 } from "chart.js";
-import RadioGroup from "../../components/RadioGroup";
 import { Bar } from "react-chartjs-2";
+import RadioGroup from "../../components/RadioGroup";
 
 ChartJS.register(
   CategoryScale,
@@ -60,12 +60,10 @@ const Bars = ({
   selectedOption,
   setSelectedOption,
 }) => {
-  const barsElement =
-    selectedOption === "departures" ? (
-      <Bar options={departureOptions} data={departureData} />
-    ) : selectedOption === "returns" ? (
-      <Bar options={returnOptions} data={returnData} />
-    ) : null;
+  const barsElements = {
+    departures: <Bar options={departureOptions} data={departureData} />,
+    returns: <Bar options={returnOptions} data={returnData} />,
+  };
 
   return (
     <div>
@@ -74,7 +72,7 @@ const Bars = ({
         selectedOption={selectedOption}
         handleRadioChange={(e) => setSelectedOption(e.target.value)}
       />
-      <div className="h-96">{barsElement}</div>
+      <div className="h-96">{barsElements[selectedOption]}</div>
     </div>
   );
 };
