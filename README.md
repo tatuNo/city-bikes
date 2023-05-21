@@ -17,6 +17,8 @@ Stations
 
 ## Prerequisites
 
+App is developed and tested in Linux environment. If on Windows, usage of [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) is highly recommended.
+
 - [Docker](https://docs.docker.com/get-docker/)
   version used in development 20.10.14
 
@@ -24,6 +26,8 @@ Stations
   version used in development v20.1.0
 
 ## Installation
+
+To get started, clone the repository.
 
 ### Production
 
@@ -89,6 +93,8 @@ Run end to end tests in interactive mode.
 npm run cypress-open
 ```
 
+Database volumes are binded to api/database & api/database-dev. To reset database, delete volumes.
+
 ## Features
 
 App uses React in frontend, NodeJS & Express in backend and PostgreSQL with Postgis extension as a database.
@@ -125,7 +131,7 @@ Ascending
 Descending
 
 ```
-/api/journeys?sort-distance
+/api/journeys?sort=-distance
 ```
 
 Stations are offered from
