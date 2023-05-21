@@ -12,7 +12,16 @@ const stationRouter = require("./controllers/stations");
 app.use(express.json());
 
 if (process.env.NODE_ENV === "production") {
-  app.use(history());
+  app.use(
+    history({
+      rewrites: [
+        {
+          from: /^\/api\/.*$/,
+          to: (context) => context.parsedUrl.path,
+        },
+      ],
+    })
+  );
   app.use(express.static("dist"));
 }
 
