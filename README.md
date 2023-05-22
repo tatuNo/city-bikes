@@ -17,12 +17,12 @@ Stations
 
 ## Prerequisites
 
-App is developed and tested in Linux environment. If on Windows, usage of [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) is highly recommended.
+App is developed and tested in Linux environment. If on Windows, use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) to make sure everything works correctly.
 
-- [Docker](https://docs.docker.com/get-docker/)
+- [Docker](https://docs.docker.com/get-docker/),
   version used in development 20.10.14
 
-- [Node](https://nodejs.org/en/download)
+- [Node](https://nodejs.org/en/download),
   version used in development v20.1.0
 
 ## Installation
@@ -77,7 +77,8 @@ npm run dev
 npm run dev-server
 ```
 
-Project contains tests for api and end to end tests. End to end test expect, that frontend and backend are running and frontend is running on port 5173.
+Project contains tests for api and end to end tests. End to end test expect, that frontend and backend are running, frontend is running on port 5173 and the database is 
+initialized.
 
 ```
 npm run test
@@ -93,7 +94,7 @@ Run end to end tests in interactive mode.
 npm run cypress-open
 ```
 
-Database volumes are binded to api/database & api/database-dev. To reset database, delete volumes.
+Database volumes are binded to api/database & api/database-dev. To reset database, delete volumes and image and build new instance with docker compose.
 
 ## Features
 
