@@ -37,11 +37,11 @@ const Pagination = ({
       </div>
       <ReactPaginate
         containerClassName="order-3 lg:order-2 isolate inline-flex -space-x-px rounded-md shadow-sm"
-        pageClassName="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-white"
-        previousClassName="relative z-10 inline-flex items-center bg-orange px-4 py-2 text-sm font-semibold text-white"
-        nextClassName="relative z-10 inline-flex items-center bg-orange px-4 py-2 text-sm font-semibold text-white"
-        breakClassName="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-white"
-        activeClassName="relative inline-flex items-center px-4 py-2 bg-lightorange text-sm font-semibold text-white"
+        pageClassName="relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white"
+        previousClassName="relative z-10 inline-flex items-center bg-orange px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white"
+        nextClassName="relative z-10 inline-flex items-center bg-orange px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white"
+        breakClassName="relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 text-sm font-semibold text-white"
+        activeClassName="relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 bg-lightorange text-sm font-semibold text-white"
         breakLabel="..."
         nextLabel=">"
         onPageChange={handlePageClick}
