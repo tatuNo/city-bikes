@@ -3,6 +3,7 @@ const router = require("express").Router();
 
 const { Station, Journey } = require("../models");
 
+// get all stations, filters in query parameters
 router.get("/", async (req, res) => {
   const { limit = 10, offset = 0, search, circle } = req.query;
   let where = {};
@@ -24,6 +25,8 @@ router.get("/", async (req, res) => {
     };
   }
 
+  // calculate distance between circle center and station point, if <= than radius,
+  // stations is inside of the circle
   if (circle) {
     const { lat, lng, radius } = circle;
     where = {
@@ -47,6 +50,7 @@ router.get("/", async (req, res) => {
   res.json(stations);
 });
 
+// get single station by id
 router.get("/:id", async (req, res) => {
   const station = await Station.findByPk(req.params.id, {
     attributes: ["id", "name", "address", "xCoordinate", "yCoordinate"],

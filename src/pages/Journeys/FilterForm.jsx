@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import TextField from "../../components/TextField";
 import { minutesToSeconds, kilometersToMeters } from "../../util/helpers";
 
+// require max value if min is set & vice versa
 const validationSchema = Yup.object().shape(
   {
     minDistance: Yup.number().when("maxDistance", {

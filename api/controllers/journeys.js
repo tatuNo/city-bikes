@@ -14,6 +14,7 @@ const parseSortParam = (sort) => {
   return [[field, direction]];
 };
 
+// get all journeys, filters in query parameters
 router.get("/", async (req, res) => {
   const {
     limit = 10,

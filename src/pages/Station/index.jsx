@@ -29,6 +29,7 @@ const Station = () => {
         markerColor:
           markerColors[s.id === Number(id) ? "default" : selectedBarOption],
       }));
+      // if station is in the top list, filter it out to prevent double markers on the map.
       const filteredStations = stationsToAdd.filter((s) => s.id !== Number(id));
       setStations([station, ...filteredStations]);
     }

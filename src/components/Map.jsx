@@ -40,6 +40,7 @@ const Map = ({ stations, setCircle, controls, center, zoom }) => {
     if (layerType === "circle") {
       const circleLayer = e.layer;
 
+      // prevent drawing more than one circle
       if (drawnCircleRef.current) {
         drawnCircleRef.current.remove();
       }
