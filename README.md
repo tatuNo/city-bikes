@@ -1,7 +1,6 @@
 # City bikes
 
 Application for displaying data from journeys made with city bikes in the Helsinki Capital area.
-Demo running at https://citybikes-app.onrender.com/ with limited journeys due to performance.
 
 Datasets used:
 
